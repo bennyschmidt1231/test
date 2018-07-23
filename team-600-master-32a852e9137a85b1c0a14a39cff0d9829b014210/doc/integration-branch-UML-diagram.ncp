@@ -1,0 +1,230 @@
+<Project>
+  <Name>UML for sprint1</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Donner registry class diagram</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Account</Name>
+        <Access>Public</Access>
+        <Location left="873" top="59" />
+        <Size width="293" height="638" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">UserAttributeCollection userAttributeCollection</Member>
+        <Member type="Field">DonorOrganInventory donorOrganInventory</Member>
+        <Member type="Field">string givenName</Member>
+        <Member type="Field">string otherName</Member>
+        <Member type="Field">string lastName</Member>
+        <Member type="Field">localDate dateOfBirth</Member>
+        <Member type="Field">localDate dateOfDeath = null</Member>
+        <Member type="Field">char gender</Member>
+        <Member type="Field">localDateTime creationTimeStamp</Member>
+        <Member type="Field">ArrayList&lt;String&gt; updateLog</Member>
+        <Member type="Field">string NHI</Member>
+        <Member type="Field">String title</Member>
+        <Member type="Field">boolean livedInUKFlag</Member>
+        <Member type="Method">publicString formatDateToString()</Member>
+        <Member type="Method">public static String createLog()</Member>
+        <Member type="Method">public static string formatDateTimeToString()</Member>
+        <Member type="Method">public static boolean validateDateOfBirth()</Member>
+        <Member type="Method">public boolean validateDateOfDeath()</Member>
+        <Member type="Method">public void validateUserInput()</Member>
+        <Member type="Method">public boolean validateGender()</Member>
+        <Member type="Method">public String toString()</Member>
+        <Member type="Method">public String updateLogToString()</Member>
+        <Member type="Method">public String updateTitle()</Member>
+        <Member type="Method">public String updateGivenName()</Member>
+        <Member type="Method">public String updateOtherName()</Member>
+        <Member type="Method">public String updateLastName()</Member>
+        <Member type="Method">public String updateGender()</Member>
+        <Member type="Method">public String updateDateofBirth()</Member>
+        <Member type="Method">public String updateDateOfDeath()</Member>
+        <Member type="Method">public String updateLivedInUKFlag()</Member>
+        <Member type="Method">public String updateProfile()</Member>
+        <Member type="Method">public String updateAttribute()</Member>
+        <Member type="Method">public String updateOrgan()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserAttributeCollection</Name>
+        <Access>Public</Access>
+        <Location left="1289" top="59" />
+        <Size width="221" height="536" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">double height</Member>
+        <Member type="Field">double weight</Member>
+        <Member type="Field">string bloodType</Member>
+        <Member type="Field">string streetAddress1</Member>
+        <Member type="Field">string streetAddress2</Member>
+        <Member type="Field">string suburb</Member>
+        <Member type="Field">string city</Member>
+        <Member type="Field">int postCode</Member>
+        <Member type="Field">string countyCode</Member>
+        <Member type="Field">String town</Member>
+        <Member type="Field">boolean bodyMaxxIndexFlag</Member>
+        <Member type="Method">public boolean validateHeight()</Member>
+        <Member type="Method">public boolean validateWeight()</Member>
+        <Member type="Method">public boolean validateBloodType()</Member>
+        <Member type="Method">public static boolean validateAlphanumericString()</Member>
+        <Member type="Method">public boolean validatePostCode()</Member>
+        <Member type="Method">public boolean validateAttributeInput()</Member>
+        <Member type="Method">public String toString()</Member>
+        <Member type="Method">public String updateHeight()</Member>
+        <Member type="Method">public String updateWeight()</Member>
+        <Member type="Method">public String updateBloodType()</Member>
+        <Member type="Method">public String updateStreetAddress1()</Member>
+        <Member type="Method">public String updateStreetAddress2()</Member>
+        <Member type="Method">public String updateSuburb()</Member>
+        <Member type="Method">public String updateTown()</Member>
+        <Member type="Method">public String updatePostCode()</Member>
+        <Member type="Method">public String updateCountryCode()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>App</Name>
+        <Access>Public</Access>
+        <Location left="472" top="41" />
+        <Size width="194" height="197" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public static void main()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DonorOrganInventory</Name>
+        <Access>Public</Access>
+        <Location left="1546" top="410" />
+        <Size width="233" height="366" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">boolean liver</Member>
+        <Member type="Field">boolean kidneys</Member>
+        <Member type="Field">boolean pancreas</Member>
+        <Member type="Field">boolean heart</Member>
+        <Member type="Field">boolean lungs</Member>
+        <Member type="Field">boolean intestine</Member>
+        <Member type="Field">boolean corneas</Member>
+        <Member type="Field">boolean middleEars</Member>
+        <Member type="Field">boolean skin</Member>
+        <Member type="Field">boolean bone</Member>
+        <Member type="Field">boolean boneMarrow</Member>
+        <Member type="Field">boolean connectiveTissue</Member>
+        <Member type="Method">public String booleanToString()</Member>
+        <Member type="Method">public String toString()</Member>
+        <Member type="Method">public void setAllOrgans()</Member>
+        <Member type="Method">public String updateOrganDonation()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>AccountManager</Name>
+        <Access>Public</Access>
+        <Location left="362" top="301" />
+        <Size width="435" height="570" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">arraylist&lt;userProfile&gt; Accounts</Member>
+        <Member type="Method">public ArrayList&lt;Account&gt; getAccounts()</Member>
+        <Member type="Method">public Scanner Create()</Member>
+        <Member type="Method">public Scanner viewWithNHI()</Member>
+        <Member type="Method">public Scanner viewAll()</Member>
+        <Member type="Method">public Scanner viewWithName()</Member>
+        <Member type="Method">public Scanner Update()</Member>
+        <Member type="Method">public LocalDate convertToLocalDate()</Member>
+        <Member type="Method">public String parseGivenName()</Member>
+        <Member type="Method">public String parseLastName()</Member>
+        <Member type="Method">public String parseOtherName()</Member>
+        <Member type="Method">public boolean checkUsedNHI()</Member>
+        <Member type="Method">public void printCreationAcceptance()</Member>
+        <Member type="Method">public boolean validateNHI()</Member>
+        <Member type="Method">public String toString()</Member>
+        <Member type="Method">public void updateObject()</Member>
+        <Member type="Method">public void viewObject()</Member>
+        <Member type="Method">public void issueView(String tar, String obj)</Member>
+        <Member type="Method">public void issueView(String first, String last, string obj)</Member>
+        <Member type="Method">public void issueUpdate()</Member>
+        <Member type="Method">public void issueCommand(String cmd)</Member>
+        <Member type="Method">public void issueCommand(String cmd, String tar, String obj)</Member>
+        <Member type="Method">public void issueCommand(String cmd, String tar, String obj, String att, String val)</Member>
+        <Member type="Method">public void issueCommand(String cmd, String dirst, String last, String obj)</Member>
+        <Member type="Method">public Scanner exporter(Scanner input)</Member>
+        <Member type="Method">public Scanner importer(Scanner input)</Member>
+        <Member type="Method">public void exportAccounts(String fileName)</Member>
+        <Member type="Method">public void importAccounts(String fileName)</Member>
+        <Member type="Method">public String removeLeadingWhitespace(String aString)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Marshal</Name>
+        <Access>Public</Access>
+        <Location left="849" top="721" />
+        <Size width="376" height="165" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private static ArrayList&lt;String&gt; marshalLog</Member>
+        <Member type="Method">public static boolean fileExists(String fileName)</Member>
+        <Member type="Method">public static void exportAccounts(ArrayList&lt;Account&gt; accounts, String fileName)</Member>
+        <Member type="Method">public static ArrayList&lt;Account&gt; importAccounts(String fileName)</Member>
+        <Member type="Method">private static ObjectMapper createMapper()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Association" first="0" second="4">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Composition</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="0" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1191</X>
+          <Y>190</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="0" second="3">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>1205</X>
+          <Y>649</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="2" second="4">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>567</X>
+          <Y>263</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>567</X>
+          <Y>276</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="4" second="5">
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>822</X>
+          <Y>811</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>822</X>
+          <Y>811</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>

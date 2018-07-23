@@ -1,0 +1,107 @@
+Commands:
+Valid commands: create, update, view, exit, import, export
+Valid NHI code: NHI is the National Health Index, a unique 7 Alphanumeric code. The 1st 3 characters must be uppercase letters that are not ‘I’ or ‘O’. the last 4 characters are digits with the last being non-zero.
+Once you enter one of the valid commands, you must finish it unless the command line tells you are back at the main menu.
+
+Creating an account:
+    Creation of the account requires the keyword create to be at the start.
+    The template is
+        Create Name=<Full Name> DOB=<date of birth> NHI=<Nhi number>
+    
+    The tokens Name=, DOB=, and NHI= all need to be part of the command otherwise the execution will fail
+    <Full Name> - This is the full name of the person. The parser uses spaces to identifiy the seperate names. For example, Peter Johnson will have first name = Peter, middle names = "" and last name= Johnson
+    <date of birth> - The date of birth of the account holder. It has to be in the format yyyy-MM-dd otherwise the execution will fail.
+    <Nhi number> - The national health index number of the account holder. Must be in the format described At the top of this document.
+    If any of the above values are empty, then the command will fail, and you will be promted to start again. 
+
+………………………………………………………………………………………………………………………………………………
+
+Updating an attribute of a donor
+
+	Includes changing any personal details, attributes, or organs they wish to donate. A log of the update is made if it is successful.
+
+	Syntax: ‘update <NHI code> object attribute value’
+
+	Example: ‘update ABC1234 profile givenName Johny’ – updates the givenName of account ABC1234 with ‘Johny’.
+
+	Example: ‘update XYZ6789 organs all true’ – updates donor registry for account XYZ6789 to donate all their organs.
+
+	Valid objects: profile, attributes, organs
+
+	Valid attributes for profile: 
+	title: Donor’s title, a string to up to 10 alphabetical characters.
+	givenName: A mandatory string that is up to 50 alphabetical characters. Includes spaces, commas, apostrophes, and dashes.
+	otherName: An optional string up to 100 alphabetical characters. Includes spaces, commas, apostrophes, and dashes.
+ 	lastName: An optional string up to 100 alphabetical characters. Includes spaces, commas, apostrophes, and dashes.
+	dateOfBirth : String formatted to YYYYMMDD. Must be before current date.
+	dateOfDeath: String formatted to YYYYMMDD. Must be before current date and after the donor’s birth date (if it exists).
+	gender: Char code in “M = Male, F = Female, O = Other, or U = Unknown/Unspecified”
+	livedInUKFlag: true/false string on whether donor has lived in UK, Ireland, or France between 1980 and 1996
+
+	Valid attributes for attribute:
+	height: A double between 0.0 and 4.0 meters.
+	weight: A double greater than 0.0 kg.
+	bloodType: A string code, one of ‘A-, A+, B-, B+, AB-, AB+, O-, O+’.
+	streetAddress1: An alphanumeric string between 1 and 100 characters long. Includes spaces, commas, apostrophes, and dashes.
+	streetAddress2: An alphanumeric string up to 100 characters long. Includes spaces, commas, apostrophes, and dashes.
+	suburb: An alphabetical string up to 100 characters long. Includes spaces, commas, apostrophes, and dashes.
+	town: An alphabetical string up to 100 characters long. Includes spaces, commas, apostrophes, and dashes.
+ 	postcode: a 4-digit integer that is not 0000.
+	countryCode: A two letter code string. E.g. “NZ”, “AU”.
+
+	Valid attributes for organs: liver, kidneys, pancreas, heart, lungs, intestines, corneas, middleEars skin, bone, boneMarrow, connectiveTissue, all
+
+
+…………………………………………………………………………………………………………………………………………..
+
+
+Viewing an account(s)
+    There are three templates for viewing a profile
+    For viewing by NHI number (Advised)
+        Command - view NHI <nhi number> <object>
+        where object is profile, log, attributes, donor or all
+        and nhi number is a unqiue id as specified at the top of this document.
+
+    For viewing by name, you require the first and lastname of the account holder. If they don't have a last name, leave it empty.
+        Command - view name <first name> <last name> <object>
+        where object is profile, log, attributes, donor or all
+
+    For viewing all donors in the database, 
+        Command - view donors <object>
+        Where object log, attributes, donor or all
+
+	A donor’s personal information may be viewed, or all donors.
+	Syntax for viewing by NHI Code or all donors: ‘view <target> attributes’
+
+	Example: ‘view NHI ABC1234 log’ – prints the update log for account ABC1234.
+
+	Example: ‘view NHI ABC1234 organs’ – prints only the organ donation list for account ABC1234.
+
+	Example: ‘view donors all’ – prints all information about all donors in the registry.
+
+	Example: ‘view name Sweeny Todd all’ – prints all information about all donors named Sweeny Todd.
+
+	Valid targets: any valid NHI code representing a donor in the registry. The keyword ‘donors’ is also valid.
+
+	Valid attributes: all, log, attributes, organs.
+…………………………………………………………………………………………………………………………………………….
+
+Exiting the system
+    Can only be done when not currently executing one of the commands, create, view, update.
+	Syntax: ‘exit’
+……………………………………………………………………………………………………………………………………………..
+
+Import Accounts From a File
+	import <file name>
+	The file must be in the same directory as the application. '.json' will be added automatically.
+	
+	Example: 'import my amazing save file'
+……………………………………………………………………………………………………………………………………………..
+
+Export Accounts to a File
+	import <file name>
+	The file will be created in the same directory as the application. '.json' will be added automatically.
+	
+	Example: 'export my amazing save file'
+	
+	

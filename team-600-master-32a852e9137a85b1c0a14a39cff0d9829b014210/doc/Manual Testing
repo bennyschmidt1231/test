@@ -1,0 +1,49 @@
+Manual Testing for this application
+
+Basic Structure
+
+Create a profile(s)
+View Profile
+Update Attribute/Organ/Profile
+View Profile
+Check that change has occured
+
+-----------------------------------
+In detail
+
+For a manual test, we got a PO (Miguel) to play with the system.
+We began by creating a profile for him. Create name=Miguel.... dateOfBirth=...... nhi=ASD9876
+From here, we updated his date of birth. This transaction failed, as we had a bug. 
+When we went to view, his datOfBirth was still the same.
+He then attempted to update his donatble organs. This transaction completed fine.
+When we went to view the updated organs, nothing showed up. There was a bug where the organs hadn't changed to true, so were not printed out.
+These bugs, found my manualling testing were then fixed once the testing had finished.
+
+**Exporting a Donor**
+*Test Procedure*
+
+1. Run the command 'mvn clean install package' in the base directory of the project.
+2. Run the application with the command 'java -jar app-0.0.jar'.
+3. Add a new account by entering 'create name=William Henry Harrison dateOfBirth=17730209 nhi=WHH0009'.
+4. Update organs with the command 'update NHI WHH0009 organs all true'.
+5. Export the donors to the file 'manualExportTest.json' by entering 'export manualExportTest'.
+6. Open the file 'manualExportTest.json' in a text editor.
+7. Confirm that all attributes of the account have been serialized successfully and that the file is human readable.
+8. Terminate the test.
+
+*Test Record*
+13-03-2018 15:55 Test successful. However, as noted by the team earlier, a null gender value is recorded in the JSON file as the null character. This appears to have no effect on functionality.
+
+
+**Importing a Donor**
+*Test Procedure*
+1. Run the command 'mvn clean install package' in the base directory of the project.
+2. Copy the file 'validImportAccountsTest.json' from the base directory to the target directory.
+3. Run the application with the command 'java -jar app-0.0.jar'.
+4. Attempt to import a file which does not exist in the target directory using 'import xyz'. An error message should appear. If not, terminate the test and report a failure.
+5. Attempt to import 'validImportAccountsTest.json' with 'import validImportAccountsTest.json'.
+6. Use command 'view donors all' to confirm that the account has been added.
+7. Terminate the test.
+
+*Test Record*
+13-03-2018 16:18 Test successful. A lack of feedback was noted after importing.

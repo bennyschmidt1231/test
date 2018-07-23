@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="clinicianMainPane" minHeight="600.0" minWidth="500.0" prefHeight="625.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seng302.controllers.ClinicianProfileController">
+    <children>
+      <SplitPane fx:id="topClinicianMainPane" dividerPositions="0.15217391304347827" orientation="VERTICAL" prefHeight="650.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <items>
+          <AnchorPane fx:id="topClinicianMainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="125.0" prefWidth="598.0">
+               <children>
+                  <Label fx:id="clinicianTitleLabel" layoutX="279.0" layoutY="24.0" text="View/Edit Clinician">
+                     <font>
+                        <Font name="System Bold" size="30.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="backButton" layoutX="14.0" layoutY="31.0" mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="31.0" prefWidth="147.0" text="← Back to Main Menu" AnchorPane.leftAnchor="40.0" />
+               </children>
+            </AnchorPane>
+          <AnchorPane fx:id="bottomClinicianMainAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+               <children>
+                  <TabPane fx:id="clinicianInfoTabPane" prefHeight="553.0" prefWidth="848.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab id="clinicianDetailsTab" fx:id="profileDetailsTab" text="Details">
+                           <content>
+                              <Pane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Text layoutX="41.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name:" wrappingWidth="152.205078125">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="clinicianProfileNameText" layoutX="168.0" layoutY="102.0" prefHeight="25.0" prefWidth="578.0" />
+                                    <Text layoutX="41.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Staff Id:" wrappingWidth="135.205078125">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Text layoutX="41.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Region:" wrappingWidth="69.7744140625">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <TextField fx:id="lastNameText" layoutX="168.0" layoutY="154.0" prefHeight="25.0" prefWidth="578.0" />
+                                    <Text layoutX="41.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Work Address:">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Button fx:id="doneButton" layoutX="632.0" layoutY="436.0" mnemonicParsing="false" onAction="#doneButtonPressed" prefHeight="31.0" prefWidth="76.0" text="Done">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Button>
+                                    <Label fx:id="staffIDLabel" layoutX="172.0" layoutY="49.0" prefHeight="26.0" prefWidth="268.0" text="Label" />
+                                    <Text layoutX="41.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name:" wrappingWidth="152.205078125">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <ComboBox fx:id="regionComboBox" layoutX="168.0" layoutY="269.0" onAction="#regionSelected" prefHeight="25.0" prefWidth="274.0" />
+                                    <Label fx:id="dateLabel" layoutX="172.0" layoutY="319.0" prefHeight="26.0" prefWidth="272.0" text="Label" />
+                                    <Text layoutX="41.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date Created:" wrappingWidth="126.7744140625">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Text>
+                                    <Label fx:id="firstNameLabel" layoutX="172.0" layoutY="102.0" prefHeight="26.0" prefWidth="572.0" text="Label" />
+                                    <Label fx:id="lastNameLabel" layoutX="172.0" layoutY="158.0" prefHeight="17.0" prefWidth="572.0" text="Label" />
+                                    <Label fx:id="regionLabel" layoutX="173.0" layoutY="274.0" prefHeight="17.0" prefWidth="265.0" text="Label" />
+                                    <Button fx:id="editButton" layoutX="632.0" layoutY="436.0" mnemonicParsing="false" onAction="#editButtonPressed" prefHeight="31.0" prefWidth="76.0" text="Edit">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="cancelButton" layoutX="718.0" layoutY="436.0" mnemonicParsing="false" onAction="#cancelButtonPressed" prefHeight="31.0" prefWidth="86.0" text="Cancel">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Button>
+                                    <TextArea fx:id="workAddressText" layoutX="168.0" layoutY="204.0" prefHeight="45.0" prefWidth="578.0" />
+                                    <Label fx:id="workAddressLabel" alignment="TOP_LEFT" layoutX="172.0" layoutY="207.0" prefHeight="45.0" prefWidth="570.0" text="Label" wrapText="true" />
+                                 </children>
+                              </Pane>
+                           </content>
+                        </Tab>
+                      <Tab fx:id="profileHistoryTab" text="Profile History">
+                           <content>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <ListView fx:id="view" layoutX="11.0" layoutY="12.0" prefHeight="476.0" prefWidth="799.0" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                    </tabs>
+                  </TabPane>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+    </children>
+</AnchorPane>

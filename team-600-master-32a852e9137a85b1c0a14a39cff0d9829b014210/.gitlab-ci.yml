@@ -1,0 +1,33 @@
+tag_checker:
+  stage: build
+  script:
+    - python3 tag_checker.py $CI_COMMIT_TAG
+  only:
+    - tags
+
+junit:
+  stage: test
+  script:
+    - mvn -B clean test
+
+recent-artifacts:
+  stage: deploy
+  script:
+    - mvn -B clean site package
+  artifacts:
+    paths:
+      - target/*.jar
+    expire_in: 1 week
+  except:
+    - tags
+
+release-artifacts:
+  stage: deploy
+  script:
+    - mvn -B clean site package
+  artifacts:
+    paths:
+    - target/*.jar
+    - target/site/jacoco/*
+  only:
+    - tags
