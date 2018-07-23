@@ -1,0 +1,165 @@
+{
+  "userAttributeCollection" : {
+    "height" : 2.0,
+    "weight" : 51.0,
+    "bloodType" : "AB-",
+    "bodyMassIndexFlag" : false,
+    "smoker" : true,
+    "bloodPressure" : "10/10",
+    "alcoholConsumption" : 2.0,
+    "chronicDiseases" : "None",
+    "bmi" : 0.0
+  },
+  "donorOrganInventory" : {
+    "liver" : false,
+    "kidneys" : false,
+    "pancreas" : false,
+    "heart" : false,
+    "lungs" : false,
+    "intestine" : false,
+    "corneas" : false,
+    "middleEars" : false,
+    "skin" : false,
+    "bone" : false,
+    "boneMarrow" : false,
+    "connectiveTissue" : false
+  },
+  "requiredOrgans" : {
+    "liver" : true,
+    "kidneys" : true,
+    "pancreas" : false,
+    "heart" : false,
+    "lungs" : false,
+    "intestine" : false,
+    "corneas" : false,
+    "middleEars" : false,
+    "skin" : false,
+    "bone" : false,
+    "boneMarrow" : false,
+    "connectiveTissue" : false,
+    "liverTimeStamp" : [ 2018, 5, 20, 13, 33, 12, 713000000 ],
+    "kidneysTimeStamp" : [ 2018, 5, 20, 13, 33, 12, 713000000 ],
+    "pancreasTimeStamp" : null,
+    "heartTimeStamp" : null,
+    "lungsTimeStamp" : null,
+    "intestineTimeStamp" : null,
+    "corneasTimeStamp" : null,
+    "middleEarsTimeStamp" : null,
+    "skinTimeStamp" : null,
+    "boneTimeStamp" : null,
+    "boneMarrowTimeStamp" : null,
+    "connectiveTissueTimeStamp" : null,
+    "currentDateTime" : null,
+    "currentOrgan" : null,
+    "organsInList" : [ true, true, false, false, false, false, false, false, false, false, false, false ]
+  },
+  "contactDetails" : {
+    "addressStreet" : "1 Fleet Street",
+    "addressCity" : "Christchurch",
+    "addressRegion" : "Canterbury",
+    "addressPostcode" : "5678",
+    "mobileNumber" : "0220456543",
+    "homeNumber" : "5452345",
+    "email" : "randomPerson92@gmail.com",
+    "emergAddressStreet" : "31b Taylors Ave",
+    "emergAddressCity" : "Christchurch",
+    "emergAddressRegion" : "Canterbury",
+    "emergAddressPostcode" : "8052",
+    "emergMobileNumber" : "0213459876",
+    "emergHomeNumber" : "5458769",
+    "emergEmail" : "randomHelper93@yahoo.com"
+  },
+  "medications" : {
+    "currentMedications" : [ ],
+    "previousMedications" : [ ],
+    "medicationLog" : [ ]
+  },
+  "nhi" : "BBB2222",
+  "title" : "MR",
+  "givenName" : "Jim",
+  "otherName" : "",
+  "lastName" : "Jones",
+  "preferredName" : "Paddy",
+  "dateOfBirth" : [ 1990, 12, 31 ],
+  "dateOfDeath" : null,
+  "gender" : "M",
+  "birthGender" : "M",
+  "creationTimeStamp" : [ 2018, 3, 13, 14, 5, 26, 297434500 ],
+  "livedInUKFlag" : true,
+  "upDateLog" : [ "Medical Procedure 'Appendectomy' with description: 'Surgical removal of the appendix', date: '12/02/2018' has been added.", "Medical Procedure 'Heart Surgery' with description: 'Heart Surgery, date TBC.', date: 'N.A.' has been added.", "Medical Procedure 'Broken Arm' with description: 'Broken arm as a child', date: '23/12/2015' has been added.", "Medical Procedure 'Foot Amputation' with description: 'Foot Amputation, tranferrence to another patient.', date: '13/05/2020' has been added.", "Medical Procedure 'Conjoined Twin Separation' with description: 'Removed conjoined twin.', date: '24/05/2004' has been added.", "Medical Procedure 'Lung Surgery' with description: 'Lung Surgery, date TBC.', date: 'N.A.' has been added.", "Medical Procedure 'Back Surgery' with description: 'Back Surgery, ask hospital.', date: '24/05/2018' has been added.", "\tgivenName changed from 'Sweeny' to 'Sweeny'. Change made at: 2018-05-09 21:48:54", "\tlastName changed from 'Todd' to 'Todd'. Change made at: 2018-05-09 21:48:54", "\tdateOfBirth changed from '1990-12-31' to '19901231'. Change made at: 2018-05-09 21:48:55", "\tdateOfDeath changed from '2016-12-31' to '20161231'. Change made at: 2018-05-09 21:48:55", "\ttitle changed from 'MR' to 'MR'. Change made at: 2018-05-09 21:48:55", "\theight changed from '2.0' to '2.0'. Change made at: 2018-05-09 21:48:55", "\tweight changed from '51.0' to '51.0'. Change made at: 2018-05-09 21:48:55", "\tlivedInUKFlag changed from 'false' to 'true'. Change made at: 2018-05-09 21:48:55", "\taddressStreet changed from '1 Fleet Street' to '1 Fleet Street'. Change made at: 2018-05-09 21:48:55", "\taddressCity changed from 'Christchurch' to 'Christchurch'. Change made at: 2018-05-09 21:48:55", "\taddressRegion changed from 'Canterbury' to 'Canterbury'. Change made at: 2018-05-09 21:48:55", "\taddressPostcode changed from '5678' to '5678'. Change made at: 2018-05-09 21:48:55", "\tmobileNumber changed from '0220456543' to '0220456543'. Change made at: 2018-05-09 21:48:55", "\thomeNumber changed from '5452345' to '5452345'. Change made at: 2018-05-09 21:48:55", "\tEmail changed from 'randomPerson92@gmail.com' to 'randomPerson92@gmail.com'. Change made at: 2018-05-09 21:48:55", "\temergAddressStreet changed from '31b Taylors Ave' to '31b Taylors Ave'. Change made at: 2018-05-09 21:48:55", "\temergAddressCity changed from 'Christchurch' to 'Christchurch'. Change made at: 2018-05-09 21:48:55", "\temergAddressegion changed from 'Canterbury' to 'Canterbury'. Change made at: 2018-05-09 21:48:55", "\temergAddressPostcode changed from '8052' to '8052'. Change made at: 2018-05-09 21:48:55", "\temergMobileNumber changed from '0213459876' to '0213459876'. Change made at: 2018-05-09 21:48:55", "\temergHomeNumber changed from '5458769' to '5458769'. Change made at: 2018-05-09 21:48:55", "\temergEmail changed from 'randomHelper93@yahoo.com' to 'randomHelper93@yahoo.com'. Change made at: 2018-05-09 21:48:55", "Error: Invalid NHI number ABC1234. An invalid NHI number has been entered.", "\tgivenName changed from 'Sweeny' to 'Sweeny'. Change made at: 2018-05-09 22:25:33", "\tlastName changed from 'Todd' to 'Todd'. Change made at: 2018-05-09 22:25:33", "\tdateOfBirth changed from '1990-12-31' to '19901231'. Change made at: 2018-05-09 22:25:35", "\tdateOfDeath changed from '2016-12-31' to '20161231'. Change made at: 2018-05-09 22:25:35", "\theight changed from '2.0' to '2.0'. Change made at: 2018-05-09 22:25:35", "\tweight changed from '51.0' to '51.0'. Change made at: 2018-05-09 22:25:35", "\taddressStreet changed from '1 Fleet Street' to '1 Fleet Street'. Change made at: 2018-05-09 22:25:35", "\taddressCity changed from 'Christchurch' to 'Christchurch'. Change made at: 2018-05-09 22:25:35", "\taddressRegion changed from 'Canterbury' to 'Canterbury'. Change made at: 2018-05-09 22:25:35", "\taddressPostcode changed from '5678' to '5678'. Change made at: 2018-05-09 22:25:35", "\tmobileNumber changed from '0220456543' to '0220456543'. Change made at: 2018-05-09 22:25:35", "\thomeNumber changed from '5452345' to '5452345'. Change made at: 2018-05-09 22:25:35", "\tEmail changed from 'randomPerson92@gmail.com' to 'randomPerson92@gmail.com'. Change made at: 2018-05-09 22:25:35", "\temergAddressStreet changed from '31b Taylors Ave' to '31b Taylors Ave'. Change made at: 2018-05-09 22:25:35", "\temergAddressCity changed from 'Christchurch' to 'Christchurch'. Change made at: 2018-05-09 22:25:35", "\temergAddressegion changed from 'Canterbury' to 'Canterbury'. Change made at: 2018-05-09 22:25:35", "\temergAddressPostcode changed from '8052' to '8052'. Change made at: 2018-05-09 22:25:35", "\temergMobileNumber changed from '0213459876' to '0213459876'. Change made at: 2018-05-09 22:25:35", "\temergHomeNumber changed from '5458769' to '5458769'. Change made at: 2018-05-09 22:25:35", "\temergEmail changed from 'randomHelper93@yahoo.com' to 'randomHelper93@yahoo.com'. Change made at: 2018-05-09 22:25:35", "\tsmoker changed from 'false' to 'true'. Change made at: 2018-05-09 22:25:35", "\talcoholConsumption changed from '2.0' to '2.0'. Change made at: 2018-05-09 22:25:35", "\tbloodPressure changed from '' to '10/10'. Change made at: 2018-05-09 22:25:35", "\tchronicDiseases changed from 'None' to 'None'. Change made at: 2018-05-09 22:25:35", "Error: Invalid NHI number ABC1234. An invalid NHI number has been entered.", "\tgivenName changed from 'Sweeny' to 'Sweeny'. Change made at: 2018-05-09 23:18:52", "\tlastName changed from 'Todd' to 'Todd'. Change made at: 2018-05-09 23:18:52", "\tdateOfBirth changed from '1990-12-31' to '19901231'. Change made at: 2018-05-09 23:18:55", "\tdateOfDeath changed from '2016-12-31' to '20161231'. Change made at: 2018-05-09 23:18:55", "\theight changed from '2.0' to '2.0'. Change made at: 2018-05-09 23:18:55", "\tweight changed from '51.0' to '51.0'. Change made at: 2018-05-09 23:18:55", "\taddressStreet changed from '1 Fleet Street' to '1 Fleet Street'. Change made at: 2018-05-09 23:18:55", "\taddressCity changed from 'Christchurch' to 'Christchurch'. Change made at: 2018-05-09 23:18:55", "\taddressRegion changed from 'Canterbury' to 'Canterbury'. Change made at: 2018-05-09 23:18:55", "\taddressPostcode changed from '5678' to '5678'. Change made at: 2018-05-09 23:18:55", "\tmobileNumber changed from '0220456543' to '0220456543'. Change made at: 2018-05-09 23:18:55", "\thomeNumber changed from '5452345' to '5452345'. Change made at: 2018-05-09 23:18:55", "\tEmail changed from 'randomPerson92@gmail.com' to 'randomPerson92@gmail.com'. Change made at: 2018-05-09 23:18:55", "\temergAddressStreet changed from '31b Taylors Ave' to '31b Taylors Ave'. Change made at: 2018-05-09 23:18:55", "\temergAddressCity changed from 'Christchurch' to 'Christchurch'. Change made at: 2018-05-09 23:18:55", "\temergAddressegion changed from 'Canterbury' to 'Canterbury'. Change made at: 2018-05-09 23:18:55", "\temergAddressPostcode changed from '8052' to '8052'. Change made at: 2018-05-09 23:18:55", "\temergMobileNumber changed from '0213459876' to '0213459876'. Change made at: 2018-05-09 23:18:55", "\temergHomeNumber changed from '5458769' to '5458769'. Change made at: 2018-05-09 23:18:55", "\temergEmail changed from 'randomHelper93@yahoo.com' to 'randomHelper93@yahoo.com'. Change made at: 2018-05-09 23:18:55", "\talcoholConsumption changed from '2.0' to '2.0'. Change made at: 2018-05-09 23:18:55", "\tbloodPressure changed from '10/10' to '10/10'. Change made at: 2018-05-09 23:18:55", "\tchronicDiseases changed from 'None' to 'None'. Change made at: 2018-05-09 23:18:55", "Error: Invalid NHI number ABC1234. An invalid NHI number has been entered.", "\tgivenName changed from 'Sweeny' to 'Sweeny'. Change made at: 2018-05-09 23:25:04", "\tlastName changed from 'Todd' to 'Todd'. Change made at: 2018-05-09 23:25:04", "\tdateOfBirth changed from '1990-12-31' to '19901231'. Change made at: 2018-05-09 23:25:06", "\tdateOfDeath changed from '2016-12-31' to '20161231'. Change made at: 2018-05-09 23:25:06", "\theight changed from '2.0' to '2.0'. Change made at: 2018-05-09 23:25:06", "\tweight changed from '51.0' to '51.0'. Change made at: 2018-05-09 23:25:06", "\taddressStreet changed from '1 Fleet Street' to '1 Fleet Street'. Change made at: 2018-05-09 23:25:06", "\taddressCity changed from 'Christchurch' to 'Christchurch'. Change made at: 2018-05-09 23:25:06", "\taddressRegion changed from 'Canterbury' to 'Canterbury'. Change made at: 2018-05-09 23:25:06", "\taddressPostcode changed from '5678' to '5678'. Change made at: 2018-05-09 23:25:06", "\tmobileNumber changed from '0220456543' to '0220456543'. Change made at: 2018-05-09 23:25:06", "\thomeNumber changed from '5452345' to '5452345'. Change made at: 2018-05-09 23:25:06", "\tEmail changed from 'randomPerson92@gmail.com' to 'randomPerson92@gmail.com'. Change made at: 2018-05-09 23:25:06", "\temergAddressStreet changed from '31b Taylors Ave' to '31b Taylors Ave'. Change made at: 2018-05-09 23:25:06", "\temergAddressCity changed from 'Christchurch' to 'Christchurch'. Change made at: 2018-05-09 23:25:06", "\temergAddressegion changed from 'Canterbury' to 'Canterbury'. Change made at: 2018-05-09 23:25:06", "\temergAddressPostcode changed from '8052' to '8052'. Change made at: 2018-05-09 23:25:06", "\temergMobileNumber changed from '0213459876' to '0213459876'. Change made at: 2018-05-09 23:25:06", "\temergHomeNumber changed from '5458769' to '5458769'. Change made at: 2018-05-09 23:25:06", "\temergEmail changed from 'randomHelper93@yahoo.com' to 'randomHelper93@yahoo.com'. Change made at: 2018-05-09 23:25:06", "\talcoholConsumption changed from '2.0' to '2.0'. Change made at: 2018-05-09 23:25:06", "\tbloodPressure changed from '10/10' to '10/10'. Change made at: 2018-05-09 23:25:06", "\tchronicDiseases changed from 'None' to 'None'. Change made at: 2018-05-09 23:25:06", "Error: Invalid NHI number ABC1234. An invalid NHI number has been entered.", "\tgivenName changed from 'Sweeny' to 'Sweeny'. Change made at: 2018-05-09 23:26:00", "\tlastName changed from 'Todd' to 'Todd'. Change made at: 2018-05-09 23:26:00", "\tdateOfBirth changed from '1990-12-31' to '19901231'. Change made at: 2018-05-09 23:26:02", "\tdateOfDeath changed from '2016-12-31' to '20161231'. Change made at: 2018-05-09 23:26:02", "\theight changed from '2.0' to '2.0'. Change made at: 2018-05-09 23:26:02", "\tweight changed from '51.0' to '51.0'. Change made at: 2018-05-09 23:26:02", "\taddressStreet changed from '1 Fleet Street' to '1 Fleet Street'. Change made at: 2018-05-09 23:26:02", "\taddressCity changed from 'Christchurch' to 'Christchurch'. Change made at: 2018-05-09 23:26:02", "\taddressRegion changed from 'Canterbury' to 'Canterbury'. Change made at: 2018-05-09 23:26:02", "\taddressPostcode changed from '5678' to '5678'. Change made at: 2018-05-09 23:26:02", "\tmobileNumber changed from '0220456543' to '0220456543'. Change made at: 2018-05-09 23:26:02", "\thomeNumber changed from '5452345' to '5452345'. Change made at: 2018-05-09 23:26:02", "\tEmail changed from 'randomPerson92@gmail.com' to 'randomPerson92@gmail.com'. Change made at: 2018-05-09 23:26:02", "\temergAddressStreet changed from '31b Taylors Ave' to '31b Taylors Ave'. Change made at: 2018-05-09 23:26:02", "\temergAddressCity changed from 'Christchurch' to 'Christchurch'. Change made at: 2018-05-09 23:26:02", "\temergAddressegion changed from 'Canterbury' to 'Canterbury'. Change made at: 2018-05-09 23:26:02", "\temergAddressPostcode changed from '8052' to '8052'. Change made at: 2018-05-09 23:26:02", "\temergMobileNumber changed from '0213459876' to '0213459876'. Change made at: 2018-05-09 23:26:02", "\temergHomeNumber changed from '5458769' to '5458769'. Change made at: 2018-05-09 23:26:02", "\temergEmail changed from 'randomHelper93@yahoo.com' to 'randomHelper93@yahoo.com'. Change made at: 2018-05-09 23:26:02", "\talcoholConsumption changed from '2.0' to '2.0'. Change made at: 2018-05-09 23:26:02", "\tbloodPressure changed from '10/10' to '10/10'. Change made at: 2018-05-09 23:26:02", "\tchronicDiseases changed from 'None' to 'None'. Change made at: 2018-05-09 23:26:02", "Error: Invalid NHI number ABC1234. An invalid NHI number has been entered.", "\tDonating: liver changed from 'true' to 'false'. Change made at: 2018-05-20 13:32:31", "\tDonating: heart changed from 'true' to 'false'. Change made at: 2018-05-20 13:32:31", "\tDonating: corneas changed from 'true' to 'false'. Change made at: 2018-05-20 13:32:31", "\tDonating: skin changed from 'true' to 'false'. Change made at: 2018-05-20 13:32:31", "\tDonating: boneMarrow changed from 'true' to 'false'. Change made at: 2018-05-20 13:32:31", "\tDonating: connectiveTissue changed from 'true' to 'false'. Change made at: 2018-05-20 13:32:31", "\tDonating: pancreas changed from 'true' to 'false'. Change made at: 2018-05-20 13:32:31", "\tDonating: liver changed from 'false' to 'true'. Change made at: 2018-05-20 13:32:39", "\tDonating: kidneys changed from 'false' to 'true'. Change made at: 2018-05-20 13:32:39", "\tDonating: liver changed from 'true' to 'false'. Change made at: 2018-05-20 13:33:12", "\tDonating: kidneys changed from 'true' to 'false'. Change made at: 2018-05-20 13:33:12", "\tReceiving: liver changed from 'false' to 'true'. Change made at: 2018-05-20 13:33:12", "\tReceiving: kidneys changed from 'false' to 'true'. Change made at: 2018-05-20 13:33:12" ],
+  "active" : true,
+  "masterIllnessList" : [ {
+    "name" : "ACUTE DEMENTIA",
+    "date" : [ 2011, 3, 28 ],
+    "cured" : false,
+    "chronic" : true
+  }, {
+    "name" : "MOUSTACHEOSIS",
+    "date" : [ 2018, 3, 11 ],
+    "cured" : false,
+    "chronic" : true
+  }, {
+    "name" : "SHINGLES",
+    "date" : [ 2018, 4, 16 ],
+    "cured" : false,
+    "chronic" : false
+  }, {
+    "name" : "SMALL POX",
+    "date" : [ 2015, 4, 11 ],
+    "cured" : false,
+    "chronic" : false
+  }, {
+    "name" : "PLAGUE",
+    "date" : [ 1999, 1, 1 ],
+    "cured" : true,
+    "chronic" : false
+  }, {
+    "name" : "POKERUS",
+    "date" : [ 2000, 1, 13 ],
+    "cured" : true,
+    "chronic" : false
+  }, {
+    "name" : "SWINE FLU",
+    "date" : [ 2007, 7, 13 ],
+    "cured" : true,
+    "chronic" : false
+  } ],
+  "medicalProcedures" : [ {
+    "summary" : "Appendectomy",
+    "description" : "Surgical removal of the appendix",
+    "date" : [ 2018, 2, 12 ],
+    "affectedOrgans" : [ ]
+  }, {
+    "summary" : "Heart Surgery",
+    "description" : "Heart Surgery, date TBC.",
+    "date" : null,
+    "affectedOrgans" : [ "Heart" ]
+  }, {
+    "summary" : "Broken Arm",
+    "description" : "Broken arm as a child",
+    "date" : [ 2015, 12, 23 ],
+    "affectedOrgans" : [ "Bone" ]
+  }, {
+    "summary" : "Foot Amputation",
+    "description" : "Foot Amputation, tranferrence to another patient.",
+    "date" : [ 2020, 5, 13 ],
+    "affectedOrgans" : [ "Skin", "Bone" ]
+  }, {
+    "summary" : "Conjoined Twin Separation",
+    "description" : "Removed conjoined twin.",
+    "date" : [ 2004, 5, 24 ],
+    "affectedOrgans" : [ "Heart", "Skin", "Bone", "Connective Tissue" ]
+  }, {
+    "summary" : "Lung Surgery",
+    "description" : "Lung Surgery, date TBC.",
+    "date" : null,
+    "affectedOrgans" : [ "Lung" ]
+  }, {
+    "summary" : "Back Surgery",
+    "description" : "Back Surgery, ask hospital.",
+    "date" : [ 2018, 5, 24 ],
+    "affectedOrgans" : [ ]
+  } ],
+  "updateMessage" : "waiting for new message",
+  "receiver" : true
+}

@@ -1,0 +1,25 @@
+{
+  "middleName" : "",
+  "lastName" : "Placeholder",
+  "contactDetails" : {
+    "address" : {
+      "streetAddressLn1" : "workplace",
+      "streetAddressLn2" : "",
+      "suburbName" : "",
+      "cityName" : "",
+      "region" : "Northland",
+      "postCode" : "",
+      "countryCode" : ""
+    },
+    "mobileNum" : "",
+    "homeNum" : "",
+    "email" : ""
+  },
+  "password" : "password",
+  "creationDate" : [ 2018, 5, 15, 15, 17, 47, 196000000 ],
+  "modifications" : [ ],
+  "firstName" : "Default Clinician",
+  "userName" : "0",
+  "active" : true,
+  "updateMessage" : "waiting for new message"
+}

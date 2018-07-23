@@ -1,0 +1,145 @@
+{
+  "firstName" : "Chuan",
+  "middleName" : "",
+  "lastName" : "Law",
+  "contactDetails" : {
+    "address" : {
+      "streetAddressLn1" : "",
+      "streetAddressLn2" : "",
+      "suburbName" : "",
+      "cityName" : "",
+      "region" : "",
+      "postCode" : "",
+      "countryCode" : ""
+    },
+    "mobileNum" : "",
+    "homeNum" : "",
+    "email" : ""
+  },
+  "userName" : "CLL8888",
+  "password" : "password",
+  "modifications" : [ ],
+  "creationDate" : [ 2018, 5, 24, 10, 32, 43, 119000000 ],
+  "emergencyContactDetails" : {
+    "address" : {
+      "streetAddressLn1" : "",
+      "streetAddressLn2" : "",
+      "suburbName" : "",
+      "cityName" : "",
+      "region" : "",
+      "postCode" : "",
+      "countryCode" : ""
+    },
+    "mobileNum" : "",
+    "homeNum" : "",
+    "email" : ""
+  },
+  "medications" : {
+    "currentMedications" : [ ],
+    "previousMedications" : [ ],
+    "medicationLog" : [ ]
+  },
+  "title" : "UNSPECIFIED",
+  "userAttributeCollection" : {
+    "height" : 0.0,
+    "weight" : 0.0,
+    "bloodType" : null,
+    "bodyMassIndexFlag" : false,
+    "smoker" : null,
+    "bloodPressure" : "0/0",
+    "alcoholConsumption" : 0.0,
+    "chronicDiseases" : "",
+    "bmi" : 0.0
+  },
+  "donorOrganInventory" : {
+    "liver" : false,
+    "kidneys" : true,
+    "pancreas" : false,
+    "heart" : false,
+    "lungs" : false,
+    "intestine" : false,
+    "corneas" : false,
+    "middleEars" : false,
+    "skin" : true,
+    "bone" : true,
+    "boneMarrow" : true,
+    "connectiveTissue" : false
+  },
+  "requiredOrgans" : {
+    "liver" : false,
+    "kidneys" : false,
+    "pancreas" : false,
+    "heart" : false,
+    "lungs" : false,
+    "intestine" : false,
+    "corneas" : false,
+    "middleEars" : false,
+    "skin" : false,
+    "bone" : false,
+    "boneMarrow" : false,
+    "connectiveTissue" : false,
+    "liverTimeStamp" : null,
+    "kidneysTimeStamp" : null,
+    "pancreasTimeStamp" : null,
+    "heartTimeStamp" : null,
+    "lungsTimeStamp" : null,
+    "intestineTimeStamp" : null,
+    "corneasTimeStamp" : null,
+    "middleEarsTimeStamp" : null,
+    "skinTimeStamp" : null,
+    "boneTimeStamp" : null,
+    "boneMarrowTimeStamp" : null,
+    "connectiveTissueTimeStamp" : null,
+    "currentDateTime" : null,
+    "currentOrgan" : null,
+    "organsInList" : [ false, false, false, false, false, false, false, false, false, false, false, false ]
+  },
+  "preferredName" : "",
+  "dateOfBirth" : [ 1997, 9, 8 ],
+  "dateOfDeath" : null,
+  "gender" : "\u0000",
+  "birthGender" : "\u0000",
+  "creationTimeStamp" : [ 2018, 5, 24, 10, 32, 43, 120000000 ],
+  "livedInUKFlag" : false,
+  "upDateLog" : [ {
+    "accountModified" : "Chuan Law (NHI: CLL8888)",
+    "modifyingAccount" : "Chuan Law (NHI: CLL8888)",
+    "valChanged" : "created",
+    "originalVal" : "",
+    "changedVal" : "active",
+    "changeTime" : [ 2018, 5, 24, 10, 32, 43, 120000000 ]
+  }, {
+    "accountModified" : "Chuan Law (NHI: CLL8888)",
+    "modifyingAccount" : "Chuan Law (NHI: CLL8888)",
+    "valChanged" : "kidneysDonation",
+    "originalVal" : "false",
+    "changedVal" : "true",
+    "changeTime" : [ 2018, 5, 24, 10, 33, 34, 378000000 ]
+  }, {
+    "accountModified" : "Chuan Law (NHI: CLL8888)",
+    "modifyingAccount" : "Chuan Law (NHI: CLL8888)",
+    "valChanged" : "skinDonation",
+    "originalVal" : "false",
+    "changedVal" : "true",
+    "changeTime" : [ 2018, 5, 24, 10, 33, 34, 394000000 ]
+  }, {
+    "accountModified" : "Chuan Law (NHI: CLL8888)",
+    "modifyingAccount" : "Chuan Law (NHI: CLL8888)",
+    "valChanged" : "boneDonation",
+    "originalVal" : "false",
+    "changedVal" : "true",
+    "changeTime" : [ 2018, 5, 24, 10, 33, 34, 396000000 ]
+  }, {
+    "accountModified" : "Chuan Law (NHI: CLL8888)",
+    "modifyingAccount" : "Chuan Law (NHI: CLL8888)",
+    "valChanged" : "boneMarrowDonation",
+    "originalVal" : "false",
+    "changedVal" : "true",
+    "changeTime" : [ 2018, 5, 24, 10, 33, 34, 400000000 ]
+  } ],
+  "active" : true,
+  "masterIllnessList" : [ ],
+  "medicalProcedures" : [ ],
+  "updateMessage" : "waiting for new message",
+  "receiver" : false
+}

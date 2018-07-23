@@ -1,0 +1,82 @@
+{
+  "firstName" : "Gwil",
+  "middleName" : "",
+  "lastName" : "Ibbot",
+  "contactDetails" : {
+    "address" : {
+      "streetAddressLn1" : "1 Fleet Street",
+      "streetAddressLn2" : "",
+      "suburbName" : "Cashmere",
+      "cityName" : "Christchurch",
+      "region" : "Canterbury",
+      "postCode" : "5678",
+      "countryCode" : "NZ"
+    },
+    "mobileNum" : "0220456543",
+    "homeNum" : "5452345",
+    "email" : "randomPerson92@gmail.com"
+  },
+  "userName" : "XYZ0091",
+  "password" : "password",
+  "modifications" : [ ],
+  "creationDate" : [ 2018, 5, 21, 10, 40, 21, 399000000 ],
+  "emergencyContactDetails" : {
+    "address" : {
+      "streetAddressLn1" : "1 Fleet Street",
+      "streetAddressLn2" : "",
+      "suburbName" : "Cashmere",
+      "cityName" : "Christchurch",
+      "region" : "Canterbury",
+      "postCode" : "8052",
+      "countryCode" : "NZ"
+    },
+    "mobileNum" : "0213459876",
+    "homeNum" : "5458769",
+    "email" : "randomHelper93@yahoo.com"
+  },
+  "medications" : {
+    "currentMedications" : [ ],
+    "previousMedications" : [ ],
+    "medicationLog" : [ ]
+  },
+  "title" : null,
+  "userAttributeCollection" : {
+    "height" : 0.0,
+    "weight" : 0.0,
+    "bloodType" : null,
+    "bodyMassIndexFlag" : false,
+    "smoker" : null,
+    "bloodPressure" : "",
+    "alcoholConsumption" : 0.0,
+    "chronicDiseases" : "",
+    "bmi" : 0.0
+  },
+  "donorOrganInventory" : {
+    "liver" : false,
+    "kidneys" : false,
+    "pancreas" : false,
+    "heart" : false,
+    "lungs" : false,
+    "intestine" : false,
+    "corneas" : false,
+    "middleEars" : false,
+    "skin" : false,
+    "bone" : false,
+    "boneMarrow" : false,
+    "connectiveTissue" : false
+  },
+  "requiredOrgans" : null,
+  "preferredName" : "",
+  "dateOfBirth" : [ 2011, 4, 12 ],
+  "dateOfDeath" : null,
+  "gender" : "\u0000",
+  "birthGender" : "\u0000",
+  "creationTimeStamp" : [ 2018, 4, 26, 14, 16, 33, 707000000 ],
+  "livedInUKFlag" : false,
+  "upDateLog" : [ ],
+  "active" : false,
+  "masterIllnessList" : [ ],
+  "medicalProcedures" : [ ],
+  "updateMessage" : "waiting for new message",
+  "receiver" : false
+}

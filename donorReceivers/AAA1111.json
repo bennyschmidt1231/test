@@ -1,0 +1,180 @@
+{
+  "firstName" : "Bill",
+  "middleName" : "",
+  "lastName" : "Smith",
+  "contactDetails" : {
+    "address" : {
+      "streetAddressLn1" : "1 Fleet Street",
+      "streetAddressLn2" : "",
+      "suburbName" : "",
+      "cityName" : "Christchurch",
+      "region" : "Canterbury",
+      "postCode" : "5678",
+      "countryCode" : ""
+    },
+    "mobileNum" : "0220456543",
+    "homeNum" : "5452345",
+    "email" : "randomPerson92@gmail.com"
+  },
+  "userName" : "AAA1111",
+  "password" : "password",
+  "modifications" : [ ],
+  "creationDate" : [ 2018, 5, 24, 15, 37, 30, 424000000 ],
+  "emergencyContactDetails" : {
+    "address" : {
+      "streetAddressLn1" : "31b Taylors Ave",
+      "streetAddressLn2" : "",
+      "suburbName" : "",
+      "cityName" : "Christchurch",
+      "region" : "Canterbury",
+      "postCode" : "8052",
+      "countryCode" : ""
+    },
+    "mobileNum" : "0213459876",
+    "homeNum" : "5458769",
+    "email" : "randomHelper93@yahoo.com"
+  },
+  "medications" : {
+    "currentMedications" : [ ],
+    "previousMedications" : [ ],
+    "medicationLog" : [ ]
+  },
+  "title" : "MR",
+  "userAttributeCollection" : {
+    "height" : 2.0,
+    "weight" : 51.0,
+    "bloodType" : "AB-",
+    "bodyMassIndexFlag" : false,
+    "smoker" : true,
+    "bloodPressure" : "10/10",
+    "alcoholConsumption" : 2.0,
+    "chronicDiseases" : "None",
+    "bmi" : 0.0
+  },
+  "donorOrganInventory" : {
+    "liver" : true,
+    "kidneys" : false,
+    "pancreas" : true,
+    "heart" : true,
+    "lungs" : false,
+    "intestine" : false,
+    "corneas" : true,
+    "middleEars" : false,
+    "skin" : true,
+    "bone" : false,
+    "boneMarrow" : true,
+    "connectiveTissue" : true
+  },
+  "requiredOrgans" : {
+    "liver" : false,
+    "kidneys" : false,
+    "pancreas" : false,
+    "heart" : true,
+    "lungs" : true,
+    "intestine" : false,
+    "corneas" : false,
+    "middleEars" : false,
+    "skin" : false,
+    "bone" : false,
+    "boneMarrow" : false,
+    "connectiveTissue" : false,
+    "liverTimeStamp" : null,
+    "kidneysTimeStamp" : null,
+    "pancreasTimeStamp" : null,
+    "heartTimeStamp" : [ 2018, 5, 20, 13, 30, 18, 526000000 ],
+    "lungsTimeStamp" : [ 2018, 5, 20, 13, 30, 18, 526000000 ],
+    "intestineTimeStamp" : null,
+    "corneasTimeStamp" : null,
+    "middleEarsTimeStamp" : null,
+    "skinTimeStamp" : null,
+    "boneTimeStamp" : null,
+    "boneMarrowTimeStamp" : null,
+    "connectiveTissueTimeStamp" : null,
+    "currentDateTime" : null,
+    "currentOrgan" : null,
+    "organsInList" : [ false, false, true, true, false, false, false, false, false, false, false, false ]
+  },
+  "preferredName" : "Paddy",
+  "dateOfBirth" : [ 1920, 12, 31 ],
+  "dateOfDeath" : null,
+  "gender" : "M",
+  "birthGender" : "M",
+  "creationTimeStamp" : [ 2018, 3, 13, 14, 5, 26, 297434500 ],
+  "livedInUKFlag" : true,
+  "upDateLog" : [ ],
+  "active" : true,
+  "masterIllnessList" : [ {
+    "name" : "ACUTE DEMENTIA",
+    "date" : [ 2011, 3, 28 ],
+    "cured" : false,
+    "chronic" : true
+  }, {
+    "name" : "MOUSTACHEOSIS",
+    "date" : [ 2018, 3, 11 ],
+    "cured" : false,
+    "chronic" : true
+  }, {
+    "name" : "SHINGLES",
+    "date" : [ 2018, 4, 16 ],
+    "cured" : false,
+    "chronic" : false
+  }, {
+    "name" : "SMALL POX",
+    "date" : [ 2015, 4, 11 ],
+    "cured" : false,
+    "chronic" : false
+  }, {
+    "name" : "PLAGUE",
+    "date" : [ 1999, 1, 1 ],
+    "cured" : true,
+    "chronic" : false
+  }, {
+    "name" : "POKERUS",
+    "date" : [ 2000, 1, 13 ],
+    "cured" : true,
+    "chronic" : false
+  }, {
+    "name" : "SWINE FLU",
+    "date" : [ 2007, 7, 13 ],
+    "cured" : true,
+    "chronic" : false
+  } ],
+  "medicalProcedures" : [ {
+    "summary" : "Appendectomy",
+    "description" : "Surgical removal of the appendix",
+    "date" : [ 2018, 2, 12 ],
+    "affectedOrgans" : [ ]
+  }, {
+    "summary" : "Heart Surgery",
+    "description" : "Heart Surgery, date TBC.",
+    "date" : null,
+    "affectedOrgans" : [ "Heart" ]
+  }, {
+    "summary" : "Broken Arm",
+    "description" : "Broken arm as a child",
+    "date" : [ 2015, 12, 23 ],
+    "affectedOrgans" : [ "Bone" ]
+  }, {
+    "summary" : "Foot Amputation",
+    "description" : "Foot Amputation, tranferrence to another patient.",
+    "date" : [ 2020, 5, 13 ],
+    "affectedOrgans" : [ "Skin", "Bone" ]
+  }, {
+    "summary" : "Conjoined Twin Separation",
+    "description" : "Removed conjoined twin.",
+    "date" : [ 2004, 5, 24 ],
+    "affectedOrgans" : [ "Heart", "Skin", "Bone", "Connective Tissue" ]
+  }, {
+    "summary" : "Lung Surgery",
+    "description" : "Lung Surgery, date TBC.",
+    "date" : null,
+    "affectedOrgans" : [ "Lung" ]
+  }, {
+    "summary" : "Back Surgery",
+    "description" : "Back Surgery, ask hospital.",
+    "date" : [ 2018, 5, 24 ],
+    "affectedOrgans" : [ ]
+  } ],
+  "updateMessage" : "waiting for new message",
+  "receiver" : true
+}
