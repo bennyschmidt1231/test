@@ -25,9 +25,11 @@ public class StatusBarController {
 
 
     /* Class Attributes */
-    private  static final String STATUSBAR_URI = "/statusBar.fxml";
-    @FXML private Label actionLabel;
-    @FXML private Pane contentPane;
+    private static final String STATUSBAR_URI = "/statusBar.fxml";
+    @FXML
+    private Label actionLabel;
+    @FXML
+    private Pane contentPane;
     private ObservableList<String> log;
 
 
@@ -50,21 +52,29 @@ public class StatusBarController {
             // Find last change and convert to string format.
             LogEntry lastChange = (LogEntry) changes.get(changes.size() - 1);
 
-            System.out.println("import");
 
             if (lastChange.getValChanged().equals("import")) {
 
                 message = "Accounts imported.";
 
+            } else if (lastChange.getValChanged().equals("save")) {
+                if (lastChange.getOriginalVal().equals("saving")) {
+                    message = "Saving...";
+                } else {
+                    message = "Save " + lastChange.getChangedVal();
+
+                }
             } else {
 
                 message = lastChange.getAccountModified() + " modified.";
 
             }
-
-            // Set label to last change.
-            setActionLabel(message);
-
+            if (lastChange.getValChanged().equals("save")) {
+                setSlowActionLabel(message);
+            } else {
+                // Set label to last change.
+                setActionLabel(message);
+            }
         };
 
         AccountManager.addSystemLogListener(listener);
@@ -75,8 +85,10 @@ public class StatusBarController {
     /**
      * Updates the action label with the last item added to the system log and
      * sets a timer to remove it after two seconds.
+     *
+     * @param action the text to add to status bar
      */
-    private void setActionLabel(String action) {
+    public void setActionLabel(String action) {
 
         actionLabel.setOpacity(1); // Reset opacity of label to 1.
         actionLabel.setText(action);
@@ -90,6 +102,26 @@ public class StatusBarController {
 
     }
 
+    /**
+     * Updates the action label with the last item added to the system log and
+     * sets a timer to remove it after two seconds.
+     *
+     * @param action the text to add to status bar
+     */
+    public void setSlowActionLabel(String action) {
+
+        actionLabel.setOpacity(1); // Reset opacity of label to 1.
+        actionLabel.setText(action);
+
+        // Perform animation which fades text after 2 seconds.
+        FadeTransition fade = new FadeTransition(Duration.seconds(2.0), actionLabel);
+        fade.setFromValue(1);
+        fade.setToValue(0);
+        fade.setDelay(Duration.seconds(60.0));
+        fade.play();
+
+    }
+
 
     /**
      * Takes an AnchorPane object, corresponding to the highest level of the
@@ -97,7 +129,7 @@ public class StatusBarController {
      * pane. This is used to display a page within the status bar.
      *
      * @param statusBar The AnchorPane representing the status bar.
-     * @param node The Node object which is to appear in the content pane.
+     * @param node      The Node object which is to appear in the content pane.
      * @return The complete status bar with injected node as a Node object.
      */
     public static AnchorPane injectNode(AnchorPane statusBar, Node node) {

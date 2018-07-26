@@ -1,34 +1,55 @@
 package seng302.model;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.time.LocalDateTime;
-import java.util.*;
+import static seng302.model.person.DonorReceiver.formatDateTimeToString;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import seng302.model.person.*;
-import seng302.model.person.Clinician;
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 import javafx.collections.ObservableList;
-
-import static seng302.model.person.DonorReceiver.formatDateTimeToString;
+import seng302.model.import_export_strategies.UserImport;
+import seng302.model.person.Administrator;
+import seng302.model.person.Clinician;
+import seng302.model.person.DonorReceiver;
+import seng302.model.person.LogEntry;
+import seng302.model.person.User;
+import seng302.model.person.UserAccountStatus;
+import seng302.model.person.UserValidationReport;
+import seng302.model.person.UserValidator;
 
 
 public class Marshal {
 
 
     /**
+     * A collection of erros that occured in the importing of accounts
+     */
+    public static Collection<String> importException = new ArrayList<>();
+
+    /**
      * A collection of file name strings which document all the user json files that were not imported correctly into the database.
      */
-    private Collection<String> failedImports;
+    private Collection<UserValidationReport> failedImports;
 
     /**
      * A collection of file name strings which document all the user json files that were imported correctly into the database.
      */
-    private Collection<String> successfulImports;
+    private Collection<UserValidationReport> successfulImports;
+
+    /**
+     * A linked Hash map of file name strings which document all the user json files that were imported correctly into the database but the user already exists in the database.
+     */
+    private LinkedHashMap<String, UserValidationReport> duplicateImports;
 
     /**
      * A collection of file name strings which document all the user json files that were not exported correctly to file.
@@ -40,13 +61,50 @@ public class Marshal {
      */
     private Collection<String> successfulExports;
 
-    private static ArrayList<String> marshalLog = new ArrayList<String>();
+    private static ArrayList<String> marshalLog = new ArrayList<>();
 
 
     /**
-     * Basic constructor for the Marshal class to instantiate import/export lists to document successful/failed import/exporting.
+     * The set of user profiles that are the result of an import operation. These could be administrators, clinicians, or donor/receivers.
      */
-    public Marshal () {
+    private Set<User> users;
+
+
+    /**
+     * ArrayList of imported users that already exist in the database.
+     */
+    private ArrayList<User> duplicateUsers;
+
+
+    /**
+     * A Linked hash map of all known Users (of type DonorReceiver OR Clinician OR Administrator) in the database.
+     */
+    private LinkedHashMap<String, User> currentUsers;
+
+
+    /**
+     * Strategy to select what type of data is going to be imported
+     */
+    private UserImport importStrategy;
+
+    private static final String jsonFileEnding = ".json";
+
+    private static final String donorReceiverString = "donorReceivers";
+
+    private static final String clinicianString = "clinicians";
+
+    private static final String adminString = "administrators";
+
+  /**
+   * Constructor of Marshall class for use in importing new Users. the currentUsers list is set to
+   * the given array list.
+   *
+   * @param users a linked hash map of the current users (Either DonorReceivers, Clinicians, or
+   * Admins).
+   */
+  public Marshal(LinkedHashMap<String, User> users) {
+
+        currentUsers = users;
 
         failedImports = new ArrayList<>();
 
@@ -56,39 +114,76 @@ public class Marshal {
 
         successfulExports = new ArrayList<>();
 
+        duplicateUsers = new ArrayList<>();
+
+        duplicateImports = new LinkedHashMap<String, UserValidationReport>();
 
     }
 
-    public Collection<String> getFailedImports() {
+  /**
+   * Creates a report from the exceptions that occurred during importing files
+   */
+  public void generateReportsFromExceptions() {
+    for (String str : importException) {
+      String array[] = str.split(",");
+      UserValidationReport report = new UserValidationReport(array[0]);
+      report.setAccountStatus(UserAccountStatus.INVALID);
+      report.addIssue(array[2]);
+      failedImports.add(report);
+    }
+
+    }
+
+
+  /**
+   * Basic constructor for the Marshal class to instantiate import/export lists to document
+   * successful/failed import/exporting.
+   */
+  public Marshal() {
+
+        failedImports = new ArrayList<>();
+
+        failedExports = new ArrayList<>();
+
+        successfulImports = new ArrayList<>();
+
+        successfulExports = new ArrayList<>();
+
+        duplicateUsers = new ArrayList<>();
+
+        duplicateImports = new LinkedHashMap<String, UserValidationReport>();
+
+    }
+
+  /**
+   * An overloaded constructor to help with testing. Inputs a set of users to allow tests to test
+   * private variables. Only called in testing.
+   *
+   * @param users Set of the current users
+   */
+  public Marshal(Set<User> users) {
+    this.users = users;
+  }
+
+    public Collection<UserValidationReport> getFailedImports() {
         return failedImports;
     }
 
-    public Collection<String> getSuccessfulImports() {
+    public Collection<UserValidationReport> getSuccessfulImports() {
         return successfulImports;
     }
 
-    public Collection<String> getFailedExports() {
-        return failedExports;
+    public LinkedHashMap<String, UserValidationReport> getDuplicateImports() {
+        return duplicateImports;
     }
 
-    public Collection<String> getSuccessfulExports() {
-        return successfulExports;
-    }
+  public ArrayList<User> getDuplicateUsers() {
+    return duplicateUsers;
+  }
 
-    public void setFailedExports(Collection<String> failedExports) {
-        this.failedExports = failedExports;
-    }
 
-    public void setFailedImports(Collection<String> failedImports) {
-        this.failedImports = failedImports;
-    }
-
-    public void setSuccessfulExports(Collection<String> successfulExports) {
-        this.successfulExports = successfulExports;
-    }
-
-    public void setSuccessfulImports(Collection<String> successfulImports) {
-        this.successfulImports = successfulImports;
+    public void setCurrentUsers(LinkedHashMap<String, User> currentUsers) {
+        this.currentUsers = currentUsers;
     }
 
 
@@ -103,28 +198,28 @@ public class Marshal {
     }
 
 
-    /**
-     * Takes the name of a file as a String and determines if a JSON
-     * file with that name exists in the base directory.
-     * @param fileName The name of the file.
-     * @return True if the file exists, false otherwise.
-     */
-    public static boolean fileExists(String fileName) {
+  /**
+   * Takes the name of a file as a String and determines if a JSON file with that name exists in the
+   * base directory.
+   *
+   * @param fileName The name of the file.
+   * @return True if the file exists, false otherwise.
+   */
+  public static boolean fileExists(String fileName) {
 
-        File file = new File(fileName + ".json");
+        File file = new File(fileName + jsonFileEnding);
         return file.isFile();
 
     }
 
 
-
-
-
-    /**
-     * Creates the directory given by the string dir if it does not already exist.
-     * @param dir A string of the directory to be made. Will be on of "administrator', 'clinicians', 'donorReceivers', or 'systemLog'.
-     */
-    private static void createDirectory(String dir) {
+  /**
+   * Creates the directory given by the string dir if it does not already exist.
+   *
+   * @param dir A string of the directory to be made. Will be on of "administrator', 'clinicians',
+   * 'donorReceivers', or 'systemLog'.
+   */
+  public static void createDirectory(String dir) {
 
         File directory = new File(dir);
 
@@ -138,17 +233,18 @@ public class Marshal {
     }
 
 
-    /**
-     * Transforms an ArrayList of donorReceivers into a series of JSON files, each
-     * one corresponding to an individual acount.
-     * @param donorReceivers The ArrayList to be exported.
-     * @throws IOException Occurs when Jackson or Java IO fails.
-     */
-    public static void exportAccounts(Map<String, DonorReceiver> donorReceivers) throws IOException {
+  /**
+   * Transforms an ArrayList of donorReceivers into a series of JSON files, each one corresponding
+   * to an individual acount.
+   *
+   * @param donorReceivers The ArrayList to be exported.
+   * @throws IOException Occurs when Jackson or Java IO fails.
+   */
+  public static void exportAccounts(Map<String, DonorReceiver> donorReceivers) throws IOException {
 
         ObjectMapper mapper = createMapper();
-        String exportPath = "donorReceivers" + File.separator;
-        createDirectory("donorReceivers"); // If it does not already exist.
+        String exportPath = donorReceiverString + File.separator;
+        createDirectory(donorReceiverString); // If it does not already exist.
 
         // For each account, write to an independent file in the donorReceivers directory.
         for (DonorReceiver donorReceiver : donorReceivers.values()) {
@@ -167,17 +263,16 @@ public class Marshal {
     }
 
 
-    /**
-     * Imports all files located within the accounts directory.
-     * @return The accounts stored in an ArrayList format.
-     * @throws IOException When the account files could not be imported.
-     */
-    public static Map<String, DonorReceiver> importAccounts()
-            throws IOException {
-
-        // Retrieve list of files in donorReceivers directory.
-        File directory = new File("donorReceivers");
-        File[] accountFiles = directory.listFiles();
+  /**
+   * Imports all files located within the accounts directory.
+   *
+   * @return The accounts stored in an ArrayList format.
+   * @throws IOException When the account files could not be imported.
+   */
+  public static Map<String, DonorReceiver> importAccounts() throws IOException {
+    // Retrieve list of files in donorReceivers directory.
+    File directory = new File("donorReceivers");
+    File[] accountFiles = directory.listFiles();
 
         // For each account file, import the data to donorReceivers.
         ObjectMapper mapper = createMapper();
@@ -185,27 +280,19 @@ public class Marshal {
 
         // Handle case where no files have been exported before.
         if (accountFiles != null) {
-
             for (int index = 0; index < accountFiles.length; index++) {
-
                 String fileName = "";
-
                 try {
-
                     File accountFile = accountFiles[index];
                     fileName = accountFile.getName();
                     DonorReceiver importedDonorReceiver = mapper.readValue(accountFile, DonorReceiver.class);
                     importedDonorReceiver.populateIllnessLists();
                     donorReceivers.put(importedDonorReceiver.getUserName(), importedDonorReceiver);
-
                     // Log import.
                     String time = formatDateTimeToString(LocalDateTime.now());
-                    marshalLog.add("Imported donorReceiver '" + importedDonorReceiver.getUserName() + "' from " +
-                            "file. Change made at: " + time);
-
+                    marshalLog.add("Imported donorReceiver '" + importedDonorReceiver.getUserName() + "' from file. Change made at: " + time);
                 } catch (IOException exception) {
-                    System.out.println(exception.getMessage());
-                    System.out.println("ERROR: Could not import '" + fileName + "'. It may not be a valid account save file.");
+                    System.err.println("ERROR: Could not import '" + fileName + "'. It may not be a valid account save file.");
                 }
             }
         }
@@ -214,12 +301,13 @@ public class Marshal {
     }
 
 
-    /**
-     * Saves the system log to file.
-     * @param systemLog The ArrayList of log strings to be exported.
-     * @throws IOException Occurs when Jackson or Java IO fails.
-     */
-    public static void exportSystemLog(ObservableList systemLog) throws IOException {
+  /**
+   * Saves the system log to file.
+   *
+   * @param systemLog The ArrayList of log strings to be exported.
+   * @throws IOException Occurs when Jackson or Java IO fails.
+   */
+  public static void exportSystemLog(ObservableList systemLog) throws IOException {
 
         ObjectMapper mapper = createMapper();
         String exportPath = "systemLog" + File.separator;
@@ -232,84 +320,46 @@ public class Marshal {
     }
 
 
-    /**
-     * Imports the System Log from the systemlog directory.
-     * @return An Array list of log strings.
-     * @throws IOException When the system log could not be imported.
-     */
-    public static ArrayList<LogEntry> importSystemLog()
-            throws IOException {
+  /**
+   * Imports the System Log from the systemlog directory.
+   *
+   * @return An Array list of log strings.
+   */
+  public static ArrayList<LogEntry> importSystemLog() {
 
         // Retrieve the system log file in systemLog directory.
         File file = new File("systemLog/systemLog.json");
 
-        // Import the System log.
-        ObjectMapper mapper = createMapper();
-        ArrayList<LogEntry> importedSystemLog = new ArrayList<>();
-        // Handle case where no file have been exported before.
-        if (file != null) {
-                try {
-                    JavaType type = mapper.getTypeFactory().constructCollectionType(ArrayList.class, LogEntry.class);
-                    importedSystemLog = mapper.readValue(file, type);
-                    // Log import.
-                    String time = formatDateTimeToString(LocalDateTime.now());
-                    System.out.println("System log successfully imported.");
-                    marshalLog.add("Imported DonorReceiver Manager system log from file. Change made at: " + time);
+    // Import the System log.
+    ObjectMapper mapper = createMapper();
+    ArrayList<LogEntry> importedSystemLog = new ArrayList<>();
+    // Handle case where no file have been exported before.
+    if (file != null) {
+      try {
+        JavaType type = mapper.getTypeFactory()
+            .constructCollectionType(ArrayList.class, LogEntry.class);
+        importedSystemLog = mapper.readValue(file, type);
+        // Log import.
+        String time = formatDateTimeToString(LocalDateTime.now());
+        System.out.println("System log successfully imported.");
+        marshalLog
+            .add("Imported DonorReceiver Manager system log from file. Change made at: " + time);
 
-                } catch (IOException exception) {
-                    System.out.println(exception.getMessage());
-                    System.out.println("ERROR: Could not import " + "systemLog/systemLog.json" + ". It may not be a valid DonorReceiver Manager save file.");
-                }
-            }
-        return importedSystemLog;
+      } catch (IOException exception) {
+        System.out.println(exception.getMessage());
+        System.out.println("ERROR: Could not import " + "systemLog/systemLog.json"
+            + ". It may not be a valid DonorReceiver Manager save file.");
+      }
     }
+    return importedSystemLog;
+  }
 
-
-
-    /*
-        // Retrieve the system log file in systemLog directory.
-        File directory = new File("systemlog");
-        File[] systemLogList = directory.listFiles();
-
-        // For each account file, import the data to accounts.
-        ObjectMapper mapper = createMapper();
-        ArrayList<AccountManager> accountManagers = new ArrayList<AccountManager>();
-
-        // Handle case where no files have been exported before.
-        if (systemLogList != null) {
-
-            for (int index = 0; index < systemLogList.length; index++) {
-
-                String fileName = "";
-
-                try {
-
-                    File accountManagerFile = systemLogList[index];
-                    fileName = accountManagerFile.getName();
-                    AccountManager importedAccountManager = mapper.readValue(accountManagerFile, AccountManager.class);
-                    accountManagers.add(importedAccountManager);
-
-                    // Log import.
-                    String time = formatDateTimeToString(LocalDateTime.now());
-                    marshalLog.add("Imported DonorReceiver Manager system log from " +
-                            "file. Change made at: " + time);
-
-                } catch (IOException exception) {
-                    System.out.println(exception.getMessage());
-
-                    System.out.println("ERROR: Could not import '" + fileName + "'. It may not be a valid Account Manager save file.");
-                }
-            }
-        }
-        return accountManagers.get(0);
-    }
-    */
-
-    /**
-     * Creates an ObjectMapper for converting between JSON and Java objects,
-     * @return The new ObjectMapper instance.
-     */
-    private static ObjectMapper createMapper() {
+  /**
+   * Creates an ObjectMapper for converting between JSON and Java objects,
+   *
+   * @return The new ObjectMapper instance.
+   */
+  private static ObjectMapper createMapper() {
 
         ObjectMapper mapper = new ObjectMapper();
         mapper.findAndRegisterModules();
@@ -320,17 +370,15 @@ public class Marshal {
     }
 
 
-
-    /**
-     * Imports all files located within the clinicians directory.
-     * @return The clinicians stored in an ArrayList format.
-     * @throws IOException When the clinician files could not be imported.
-     */
-    public static Map<String, Clinician> importClinicians()
-            throws IOException {
+  /**
+   * Imports all files located within the clinicians directory.
+   *
+   * @return The clinicians stored in an ArrayList format.
+   */
+  public static Map<String, Clinician> importClinicians() {
 
         // Retrieve list of files in clinicians directory.
-        File directory = new File("clinicians");
+        File directory = new File(clinicianString);
         File[] clinicianFiles = directory.listFiles();
 
         // For each clinician file, import the data to clinicians.
@@ -355,11 +403,8 @@ public class Marshal {
                     String time = formatDateTimeToString(LocalDateTime.now());
                     marshalLog.add("Imported clinician '" + importedClinician.getUserName() + "' from " +
                             "file. Change made at: " + time);
-
                 } catch (IOException exception) {
-
-                    System.out.println("ERROR: Could not import '" + fileName + "'. It may not be a valid clinician save file.");
-
+                    System.err.println("ERROR: Could not import '" + fileName + "'. It may not be a valid clinician save file.");
                 }
             }
         }
@@ -367,17 +412,18 @@ public class Marshal {
     }
 
 
-    /**
-     * Transforms an ArrayList of clinicians into a series of JSON files, each
-     * one corresponding to an individual clinician.
-     * @param clinicians The ArrayList to be exported.
-     * @throws IOException Occurs when Jackson or Java IO fails.
-     */
-    public static void exportClinicians(Map<String, Clinician> clinicians) throws IOException {
+  /**
+   * Transforms an ArrayList of clinicians into a series of JSON files, each one corresponding to an
+   * individual clinician.
+   *
+   * @param clinicians The ArrayList to be exported.
+   * @throws IOException Occurs when Jackson or Java IO fails.
+   */
+  public static void exportClinicians(Map<String, Clinician> clinicians) throws IOException {
 
         ObjectMapper mapper = createMapper();
-        String exportPath = "clinicians" + File.separator;
-        createDirectory("clinicians"); // If it does not already exist.
+        String exportPath = clinicianString + File.separator;
+        createDirectory(clinicianString); // If it does not already exist.
 
         // For each clinician, write to an independent file in the clinicians directory.
         for (Clinician clinician : clinicians.values()) {
@@ -394,17 +440,18 @@ public class Marshal {
     }
 
 
-    /**
-     * Transforms an ArrayList of administrators into a series of JSON files, each
-     * one corresponding to an individual admin.
-     * @param admins The ArrayList to be exported.
-     * @throws IOException Occurs when Jackson or Java IO fails.
-     */
-    public static void exportAdministrators(Map<String, Administrator> admins) throws IOException {
+  /**
+   * Transforms an ArrayList of administrators into a series of JSON files, each one corresponding
+   * to an individual admin.
+   *
+   * @param admins The ArrayList to be exported.
+   * @throws IOException Occurs when Jackson or Java IO fails.
+   */
+  public static void exportAdministrators(Map<String, Administrator> admins) throws IOException {
 
         ObjectMapper mapper = createMapper();
-        String exportPath = "administrators" + File.separator;
-        createDirectory("administrators"); // If it does not already exist.
+        String exportPath = adminString + File.separator;
+        createDirectory(adminString); // If it does not already exist.
 
         // For each admin, write to an independent file in the administrators directory.
         for (Administrator admin : admins.values()) {
@@ -420,16 +467,15 @@ public class Marshal {
     }
 
 
-    /**
-     * Imports all files located within the admins directory.
-     * @return The admins stored in an ArrayList format.
-     * @throws IOException When the administrator files could not be imported.
-     */
-    public static Map<String, Administrator> importAdministrators()
-            throws IOException {
+  /**
+   * Imports all files located within the admins directory.
+   *
+   * @return The admins stored in an ArrayList format.
+   */
+  public static Map<String, Administrator> importAdministrators() {
 
         // Retrieve list of files in clinicians directory.
-        File directory = new File("administrators");
+        File directory = new File(adminString);
         File[] adminFiles = directory.listFiles();
 
         // For each clinician file, import the data to clinicians.
@@ -438,13 +484,9 @@ public class Marshal {
 
         // Handle case where no files have been exported before.
         if (adminFiles != null) {
-
             for (int index = 0; index < adminFiles.length; index++) {
-
                 String fileName = "";
-
                 try {
-
                     File adminFile = adminFiles[index];
                     fileName = adminFile.getName();
                     Administrator importedAdmin = mapper.readValue(adminFile, Administrator.class);
@@ -452,65 +494,281 @@ public class Marshal {
 
                     // Log import.
                     String time = formatDateTimeToString(LocalDateTime.now());
-                    marshalLog.add("Imported admin '" + importedAdmin.getUserName() + "' from " +
-                            "file. Change made at: " + time);
-
+                    marshalLog.add("Imported admin '" + importedAdmin.getUserName() + "' from file. Change made at: " + time);
                 } catch (IOException exception) {
-
-                    System.out.println("ERROR: Could not import '" + fileName + "'. It may not be a valid admin save file.");
-
+                    System.err.println("ERROR: Could not import '" + fileName + "'. It may not be a valid admin save file.");
                 }
             }
         }
         return admins;
     }
 
-
-    public ArrayList<User> ImportSelectedUsersFromFile(File directory, String type) {
-
-        // Retrieve list of files in the given directory type.
-        File[] userFiles = directory.listFiles();
-
-        // For each .json file, import the data into the App.
-        ObjectMapper mapper = createMapper();
-        ArrayList<User> users = new ArrayList<>();
-
-        // Handle case where no files have been exported before.
-        if (userFiles != null) {
-
-            for (int index = 0; index < userFiles.length; index++) {
-                String fileName = "";
-                try {
-                    File userFile = userFiles[index];
-                    fileName = userFile.getName();
-                    if (type.equals("donorReceivers")) {
-                        DonorReceiver importedDonor = mapper.readValue(userFile, DonorReceiver.class);
-                        users.add(importedDonor);
-                    } else if (type.equals("clinicians")) {
-                        Clinician importedClinician = mapper.readValue(userFile, Clinician.class);
-                        users.add(importedClinician);
-                    } else {
-                        Administrator importedAdmin = mapper.readValue(userFile, Administrator.class);
-                        users.add(importedAdmin);
-                    }
-
-                    // Log import.
-                    String time = formatDateTimeToString(LocalDateTime.now());
-                    marshalLog.add("Imported user '" +  users.get(users.size() -1).getUserName()  + "' from " +
-                            "file. Change made at: " + time);
-
-                    successfulImports.add(fileName);
+  /**
+   * Sets the Marshall import strategy to the strategy specified.
+   *
+   * @param userImport Import strategy
+   * @throws NullPointerException a null pointer exception if the client did not provide a
+   * strategy.
+   */
+  public void setImportStrategy(UserImport userImport) throws NullPointerException {
+    if (userImport == null) {
+      throw new NullPointerException();
+    } else {
+      this.importStrategy = userImport;
+    }
+  }
 
 
+  /**
+   * Imports and validates the given User files from the given directory/locationString and combines
+   * the imported users with the currentUsers of the Marshall class if they are not duplicates and
+   * have valid attributes. The type of user to be imported is given by the UserType string.
+   *
+   * @param userType A string of the type of user to be imported. One of 'donor', 'clinician', or
+   * 'admin'.
+   * @param locationString A string of the file path of the user file to be imported.
+   * @param directory the file to be imported.
+   * @return returns a linked HashMap of the currentUsers plus any successfully imported User files.
+   * @throws IOException Thrown if there was an issue with the file import (e.g. missing file)
+   * @throws IllegalArgumentException Thrown if the given userType is not what is expected or File
+   * formatting was wrong (not a .csv or not a .JSON etc) or the reader/format was null
+   */
+  public LinkedHashMap<String, User> importer(String userType, String locationString,
+      File directory) throws IOException, IllegalArgumentException {
+    users = new HashSet(importStrategy.importer(userType, locationString, directory));
+    if (userType.equalsIgnoreCase("donor/receiver")) {
+      LinkedHashMap<String, User> existingDonors = new LinkedHashMap<>(currentUsers);
+      validateAndAddDonors(existingDonors);
+      return existingDonors;
 
-                } catch (IOException exception) {
-                    //TODO handle user selecting wrong file types
-                    System.out.println("ERROR: Could not import '" + fileName + "'. It may not be a valid user save file.");
-                    failedImports.add(fileName);
-                }
-            }
+    } else if (userType.equalsIgnoreCase("clinician")) {
+      LinkedHashMap<String, User> existingClinicians = new LinkedHashMap<>(currentUsers);
+      validateAndAddClinicians(existingClinicians);
+      return existingClinicians;
+
+        } else if (userType.equalsIgnoreCase("administrator")) {
+            LinkedHashMap<String, User> existingAdministrators = new LinkedHashMap<>(currentUsers);
+            validateAndAddAdmins(existingAdministrators);
+            return existingAdministrators;
+
+        } else {
+            throw new IllegalArgumentException("userType must be either 'donor/receiver', 'clinician', or 'administrator'.");
         }
-        return users;
     }
 
+
+  /**
+   * Takes in a given linkedHashMap of existing donors and for each donor in the Marshall 'users'
+   * set; validates the donor's attributes, generates a validation report of the results, and checks
+   * if the donor already exists in the linkedHashMap. If not it is added to the linkHashMap. If
+   * does exist, the donor is added to the duplicateUsers arraylist instead. If the report status is
+   * not INVALID then the report is added to the successfulImports list. Otherwise it is added to
+   * the failedImports list.
+   *
+   * @param existingDonors A linked hashmap of all the known donors in the database.
+   */
+  private void validateAndAddDonors(LinkedHashMap<String, User> existingDonors) {
+    ArrayList<DonorReceiver> donors = returnDonorReceiverArrayList();
+    for (DonorReceiver donor : donors) {
+      UserValidator validator = new UserValidator(donor, existingDonors);
+      UserValidationReport report = validator.getReport();
+      addUserToCorrectCollection(report, donor, existingDonors);
+    }
+  }
+
+
+  /**
+   * Takes in a given linkedHashMap of existing clinicians and for each clinician in the Marshall
+   * 'users' set; validates the clinician's attributes, generates a validation report of the
+   * results, and checks if the clinician already exists in the linkedHashMap. If not it is added to
+   * the linkHashMap. If does exist, the clinician is added to the duplicateUsers arraylist instead.
+   * If the report status is not INVALID then the report is added to the successfulImports list.
+   * Otherwise it is added to the failedImports list.
+   *
+   * @param existingClinicians A linked hashmap of all the known donors in the database.
+   */
+  private void validateAndAddClinicians(LinkedHashMap<String, User> existingClinicians) {
+    ArrayList<Clinician> clinicians = returnClinicianArrayList();
+    for (Clinician clinician : clinicians) {
+      UserValidator validator = new UserValidator(clinician, existingClinicians);
+      UserValidationReport report = validator.getReport();
+      addUserToCorrectCollection(report, clinician, existingClinicians);
+    }
+  }
+
+  /**
+   * Takes in a given linkedHashMap of existing admins and for each admin in the Marshall 'users'
+   * set; validates the admin's attributes, generates a validation report of the results, and checks
+   * if the admin already exists in the linkedHashMap. If not it is added to the linkHashMap. If
+   * does exist, the admin is added to the duplicateUsers arraylist instead. If the report status is
+   * not INVALID then the report is added to the successfulImports list. Otherwise it is added to
+   * the failedImports list.
+   *
+   * @param existingAdmins A linked hashmap of all the known admins in the database.
+   */
+  private void validateAndAddAdmins(LinkedHashMap<String, User> existingAdmins) {
+    ArrayList<Administrator> admins = returnAdministratorArrayList();
+    for (Administrator admin : admins) {
+      UserValidator validator = new UserValidator(admin, existingAdmins);
+      UserValidationReport report = validator.getReport();
+      addUserToCorrectCollection(report, admin, existingAdmins);
+    }
+  }
+
+  /**
+   * Adds the User to the correct list as detailed in validateAndAdd methods. Created to ease
+   * duplication
+   *
+   * @param report The report created by the validation check
+   * @param user The user to add to th assigned collection
+   */
+  private void addUserToCorrectCollection(UserValidationReport report, User user,
+      LinkedHashMap<String, User> existingUsers) {
+    if (report.getAccountStatus() == UserAccountStatus.INVALID) {
+      failedImports.add(report);
+    } else if (report.getAccountStatus() == UserAccountStatus.EXISTS) {
+      duplicateImports.put(report.getUsername(), report);
+      duplicateUsers.add(user);
+    } else {
+      successfulImports.add(report);
+      LogEntry logEntry = new LogEntry(user, AccountManager.getCurrentUser(), "Imported from file.",
+          "", "");
+      user.getModifications().add(logEntry);
+      if (user instanceof DonorReceiver) {
+        ((DonorReceiver) user).getUpDateLog().add(logEntry);
+      }
+      AccountManager.getSystemLog().add(logEntry);
+      existingUsers.put(user.getUserName(), user);
+    }
+  }
+
+
+  /**
+   * Takes the Marshall 'users' set and instantiates an arrayList of administrators from it.
+   *
+   * @return An arrayList of imported administrator profiles.
+   */
+  public ArrayList<Administrator> returnAdministratorArrayList() {
+    Administrator a;
+    User b;
+    ArrayList<Administrator> movedUsers = new ArrayList<>();
+    Iterator iterator = users.iterator();
+    while (iterator.hasNext()) {
+      b = (User) iterator.next();
+      if (b instanceof Administrator) {
+        a = (Administrator) b;
+        movedUsers.add(a);
+      }
+    }
+    return movedUsers;
+  }
+
+
+  /**
+   * Takes the Marshall 'users' set and instantiates an arrayList of clinicians from it.
+   *
+   * @return An arrayList of imported clinician profiles.
+   */
+  public ArrayList<Clinician> returnClinicianArrayList() {
+    Clinician c;
+    User b;
+    ArrayList<Clinician> movedUsers = new ArrayList<>();
+    Iterator iterator = users.iterator();
+    while (iterator.hasNext()) {
+      b = (User) iterator.next();
+      if (b instanceof Clinician) {
+        c = (Clinician) b;
+        movedUsers.add(c);
+      }
+    }
+    return movedUsers;
+  }
+
+
+  /**
+   * Takes the Marshall 'users' set and instantiates an arrayList of donor/receivers from it.
+   *
+   * @return An arrayList of imported donorReceiver profiles.
+   */
+  public ArrayList<DonorReceiver> returnDonorReceiverArrayList() {
+    DonorReceiver d;
+    User b;
+    ArrayList<DonorReceiver> movedUsers = new ArrayList<>();
+    Iterator iterator = users.iterator();
+    while (iterator.hasNext()) {
+      b = (User) iterator.next();
+      if (b instanceof DonorReceiver) {
+        d = (DonorReceiver) b;
+        movedUsers.add(d);
+      }
+    }
+    return movedUsers;
+  }
+
+
+  /**
+   * Converts the given ArrayList of users to a linked hashmap with the key-value pair being the
+   * user's username and the user object.
+   *
+   * @param users an ArrayList of users; DonorReceivers, Clinicians, or Administrators
+   * @return returns a LinkedHashMap of <user username, user> mappings
+   */
+  private LinkedHashMap<String, User> convertUserArrayListToLinkedHashmap(
+      ArrayList<? extends User> users) {
+    LinkedHashMap<String, User> mappedUsers = new LinkedHashMap<>(1000000);
+    for (User user : users) {
+      mappedUsers.put(user.getUserName(), user);
+    }
+    return mappedUsers;
+
+    }
+
+
+  /**
+   * Copies some of the given original user's attributes with the new user and return the merged
+   * user. This is for .csv imported users who are missing certain attributes and are duplicates of
+   * existing users in the database.
+   *
+   * @param original the original existing DonorReceiver in the database.
+   * @param nova the new DonorReceiver who is the recipient of the original user's attributes.
+   * @return the merged DonorReceiver with copied attributes
+   */
+  public DonorReceiver mergeOriginalDonorWithNewDonor(DonorReceiver original, DonorReceiver nova) {
+    nova.setCreationDate(original.getCreationDate());
+    nova.setPassword(original.getPassword());
+    nova.setMiddleName(original.getMiddleName());
+    nova.setModifications(original.getModifications());
+    nova.setEmergencyContactDetails(original.getEmergencyContactDetails());
+    nova.setTitle(original.getTitle());
+    nova.setDonorOrganInventory(original.getDonorOrganInventory());
+    nova.setRequiredOrgans(original.getRequiredOrgans());
+    nova.setPreferredName(original.getPreferredName());
+    nova.setLivedInUKFlag(original.getLivedInUKFlag());
+    nova.setActive(original.isActive());
+    nova.setReceiver(original.getReceiver());
+    nova.setMasterIllnessList(original.getMasterIllnessList());
+    nova.populateIllnessLists();
+    nova.setMedications(original.getMedications());
+    nova.setMedicalProcedures(original.getMedicalProcedures());
+    nova.getUserAttributeCollection()
+        .setBodyMassIndexFlag(original.getUserAttributeCollection().getBodyMassIndexFlag());
+    try {
+      nova.getUserAttributeCollection()
+          .setSmoker(original.getUserAttributeCollection().getSmoker());
+    } catch (NullPointerException e) {
+      nova.getUserAttributeCollection().setSmoker(false);
+    }
+    nova.getUserAttributeCollection()
+        .setBloodPressure(original.getUserAttributeCollection().getBloodPressure());
+    nova.getUserAttributeCollection()
+        .setAlcoholConsumption(original.getUserAttributeCollection().getAlcoholConsumption());
+    nova.setModifications(original.getUpDateLog());
+    nova.setUpdateLog(original.getUpDateLog());
+    LogEntry logEntry = new LogEntry(nova, AccountManager.getCurrentUser(),
+        "Merged attributes with existing profile.", "Previous user", "Imported user");
+    nova.getModifications().add(logEntry);
+    AccountManager.getSystemLog().add(logEntry);
+
+        return nova;
+    }
 }

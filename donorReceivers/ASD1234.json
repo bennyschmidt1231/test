@@ -45,7 +45,7 @@
     "weight" : 0.0,
     "bloodType" : null,
     "bodyMassIndexFlag" : false,
-    "smoker" : null,
+    "smoker" : false,
     "bloodPressure" : "0/0",
     "alcoholConsumption" : 0.0,
     "chronicDiseases" : "",

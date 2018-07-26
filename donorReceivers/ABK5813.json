@@ -1,0 +1,143 @@
+{
+  "firstName" : "Frazier",
+  "middleName" : "",
+  "lastName" : "Baily",
+  "contactDetails" : {
+    "address" : {
+      "streetAddressLn1" : "937 Dayton",
+      "streetAddressLn2" : "",
+      "suburbName" : "Pandak",
+      "cityName" : "Rotorua",
+      "region" : "Bay  of Plenty",
+      "postCode" : "9919",
+      "countryCode" : "NZ"
+    },
+    "mobileNum" : "024 239 5079",
+    "homeNum" : "09 543 8064",
+    "email" : "fbailye@wikipedia.org"
+  },
+  "userName" : "ABK5813",
+  "password" : "password",
+  "modifications" : [ ],
+  "creationDate" : [ 2018, 7, 21, 10, 45, 51, 391000000 ],
+  "emergencyContactDetails" : {
+    "address" : {
+      "streetAddressLn1" : "",
+      "streetAddressLn2" : "",
+      "suburbName" : "",
+      "cityName" : "",
+      "region" : "",
+      "postCode" : "",
+      "countryCode" : ""
+    },
+    "mobileNum" : "",
+    "homeNum" : "",
+    "email" : ""
+  },
+  "medications" : {
+    "currentMedications" : [ ],
+    "previousMedications" : [ ],
+    "medicationLog" : [ ]
+  },
+  "title" : "UNSPECIFIED",
+  "userAttributeCollection" : {
+    "height" : 185.0,
+    "weight" : 111.0,
+    "bloodType" : "B-",
+    "bodyMassIndexFlag" : false,
+    "smoker" : null,
+    "bloodPressure" : "1/3",
+    "alcoholConsumption" : 280.3,
+    "chronicDiseases" : "",
+    "bmi" : 0.0
+  },
+  "donorOrganInventory" : {
+    "liver" : false,
+    "kidneys" : false,
+    "pancreas" : false,
+    "heart" : false,
+    "lungs" : false,
+    "intestine" : false,
+    "corneas" : false,
+    "middleEars" : false,
+    "skin" : false,
+    "bone" : false,
+    "boneMarrow" : false,
+    "connectiveTissue" : false
+  },
+  "requiredOrgans" : {
+    "liver" : false,
+    "kidneys" : false,
+    "pancreas" : false,
+    "heart" : false,
+    "lungs" : false,
+    "intestine" : false,
+    "corneas" : false,
+    "middleEars" : false,
+    "skin" : false,
+    "bone" : false,
+    "boneMarrow" : false,
+    "connectiveTissue" : false,
+    "liverTimeStamp" : null,
+    "kidneysTimeStamp" : null,
+    "pancreasTimeStamp" : null,
+    "heartTimeStamp" : null,
+    "lungsTimeStamp" : null,
+    "intestineTimeStamp" : null,
+    "corneasTimeStamp" : null,
+    "middleEarsTimeStamp" : null,
+    "skinTimeStamp" : null,
+    "boneTimeStamp" : null,
+    "boneMarrowTimeStamp" : null,
+    "connectiveTissueTimeStamp" : null,
+    "currentDateTime" : null,
+    "currentOrgan" : null,
+    "organsInList" : [ false, false, false, false, false, false, false, false, false, false, false, false ]
+  },
+  "preferredName" : "",
+  "dateOfBirth" : [ 1964, 12, 15 ],
+  "dateOfDeath" : null,
+  "gender" : "M",
+  "birthGender" : "M",
+  "creationTimeStamp" : [ 2018, 7, 21, 10, 45, 51, 391000000 ],
+  "livedInUKFlag" : false,
+  "upDateLog" : [ {
+    "accountModified" : "Frazier Baily (NHI: ABK5813)",
+    "modifyingAccount" : "Default Administrator (Administrator, username: Sudo)",
+    "valChanged" : "Illness 'DRUNK AS A SKUNK'",
+    "originalVal" : "non-existent",
+    "changedVal" : "created",
+    "changeTime" : [ 2018, 7, 21, 11, 57, 21, 953000000 ]
+  }, {
+    "accountModified" : "Frazier Baily (NHI: ABK5813)",
+    "modifyingAccount" : "Default Administrator (Administrator, username: Sudo)",
+    "valChanged" : "bloodPressure",
+    "originalVal" : "0/0",
+    "changedVal" : "0/3",
+    "changeTime" : [ 2018, 7, 21, 12, 11, 25, 160000000 ]
+  }, {
+    "accountModified" : "Frazier Baily (NHI: ABK5813)",
+    "modifyingAccount" : "Default Administrator (Administrator, username: Sudo)",
+    "valChanged" : "bloodPressure",
+    "originalVal" : "0/3",
+    "changedVal" : "1/3",
+    "changeTime" : [ 2018, 7, 21, 12, 12, 24, 144000000 ]
+  }, {
+    "accountModified" : "Frazier Baily (NHI: ABK5813)",
+    "modifyingAccount" : "Default Administrator (Administrator, username: Sudo)",
+    "valChanged" : "alcoholConsumption",
+    "originalVal" : "0.0",
+    "changedVal" : "280.3",
+    "changeTime" : [ 2018, 7, 21, 12, 14, 20, 648000000 ]
+  } ],
+  "active" : true,
+  "masterIllnessList" : [ {
+    "name" : "DRUNK AS A SKUNK",
+    "date" : [ 2018, 7, 21 ],
+    "cured" : false,
+    "chronic" : true
+  } ],
+  "medicalProcedures" : [ ],
+  "updateMessage" : "waiting for new message",
+  "receiver" : false
+}

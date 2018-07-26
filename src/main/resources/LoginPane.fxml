@@ -23,11 +23,8 @@
             <Font size="18.0" />
          </font></Text>
         <TextField id="usernameTextField" fx:id="usernameTextField" layoutX="205.0" layoutY="214.0" prefHeight="39.0" prefWidth="330.0" />
+      <PasswordField fx:id="passwordField" layoutX="205.0" layoutY="275.0" prefHeight="39.0" prefWidth="330.0" />
         <Button fx:id="loginButton" layoutX="387.0" layoutY="332.0" mnemonicParsing="false" onAction="#login" prefHeight="39.0" prefWidth="148.0" text="Login">
-         <font>
-            <Font size="18.0" />
-         </font></Button>
-        <Button fx:id="createDonorButton" layoutX="91.0" layoutY="332.0" mnemonicParsing="false" onAction="#createDonor" prefHeight="39.0" prefWidth="148.0" text="Create Donor">
          <font>
             <Font size="18.0" />
          </font></Button>
@@ -37,16 +34,19 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button fx:id="adminButton" layoutX="571.0" layoutY="332.0" mnemonicParsing="false" onAction="#adminButtonPressed" prefHeight="39.0" prefWidth="164.0" text="Administrator">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
       <Button fx:id="clinicianButton" layoutX="571.0" layoutY="273.0" mnemonicParsing="false" onAction="#clinicianButtonPressed" prefHeight="39.0" prefWidth="164.0" text="Clinician">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <PasswordField fx:id="passwordField" layoutX="205.0" layoutY="275.0" prefHeight="39.0" prefWidth="330.0" />
+      <Button fx:id="adminButton" layoutX="571.0" layoutY="332.0" mnemonicParsing="false" onAction="#adminButtonPressed" prefHeight="39.0" prefWidth="164.0" text="Administrator">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+        <Button fx:id="createDonorButton" layoutX="91.0" layoutY="332.0" mnemonicParsing="false" onAction="#createDonor" prefHeight="39.0" prefWidth="148.0" text="Create Donor">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
     </children>
 </AnchorPane>

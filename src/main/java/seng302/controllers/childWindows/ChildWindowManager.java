@@ -1,13 +1,13 @@
 package seng302.controllers.childWindows;
 
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import seng302.model.person.User;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -53,12 +53,12 @@ public class ChildWindowManager {
     }
 
 
-    /**
-     * Adds a new ChildWindow instance to the set of tracked instances.
-     *
-     * @return True if the resulting ChildWindow instance did not already exist.
-     */
-    public boolean addChildWindow(Stage stage, ChildWindowType type) {
+  /**
+   * Adds a new ChildWindow instance to the set of tracked instances.
+   *
+   * @return True if the resulting ChildWindow instance did not already exist.
+   */
+  public boolean addChildWindow(Stage stage, ChildWindowType type) {
 
         ChildWindow childWindow = new ChildWindow(stage, type);
         addRemoveOnCloseListener(childWindow);
@@ -67,15 +67,15 @@ public class ChildWindowManager {
     }
 
 
-    /**
-     * Creates a new ChildWindow instance from a Stage and User. This
-     * should be used if the window displays data related to a person.
-     *
-     * @param stage The Stage object to appear in the child window.
-     * @param account The User object associated with the window.
-     * @return True if the resulting ChildWindow instance did not already exist.
-     */
-    public boolean addChildWindow(Stage stage, User account) {
+  /**
+   * Creates a new ChildWindow instance from a Stage and User. This should be used if the window
+   * displays data related to a person.
+   *
+   * @param stage The Stage object to appear in the child window.
+   * @param account The User object associated with the window.
+   * @return True if the resulting ChildWindow instance did not already exist.
+   */
+  public boolean addChildWindow(Stage stage, User account) {
 
         ChildWindow childWindow = new ChildWindow(stage, account);
         addRemoveOnCloseListener(childWindow);
@@ -115,7 +115,7 @@ public class ChildWindowManager {
 
         boolean exists = false;
 
-        for (ChildWindow childWindow:childWindows) {
+    for (ChildWindow childWindow : childWindows) {
 
             if (childWindow.UserIsIdentical(user)) {
 
@@ -144,7 +144,7 @@ public class ChildWindowManager {
 
         boolean exists = false;
 
-        for (ChildWindow childWindow:childWindows) {
+    for (ChildWindow childWindow : childWindows) {
 
             if (childWindow.TypeIsIdentical(type)) {
 
@@ -167,7 +167,7 @@ public class ChildWindowManager {
      */
     public void closeAllChildWindows() {
 
-        for (ChildWindow childWindow:childWindows) {
+    for (ChildWindow childWindow : childWindows) {
 
             childWindow.closeStage();
 

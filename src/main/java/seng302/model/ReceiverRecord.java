@@ -3,67 +3,69 @@ package seng302.model;
 import java.time.LocalDateTime;
 
 public class ReceiverRecord {
-    String fullName;
 
-    public String getFullName() {
-        return fullName;
-    }
+  String fullName;
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
+  public String getFullName() {
+    return fullName;
+  }
 
-    public ReceiverRecord(String fullName, String nhi, String region, LocalDateTime timestamp, String organ) {
+  public void setFullName(String fullName) {
+    this.fullName = fullName;
+  }
 
-        this.fullName = fullName;
-        this.nhi = nhi;
-        this.region = region;
-        this.timestamp = timestamp;
-        this.organ = organ;
-    }
+  public ReceiverRecord(String fullName, String nhi, String region, LocalDateTime timestamp,
+      String organ) {
 
-    String nhi;
-    String region;
-    LocalDateTime timestamp;
-    String organ;
+    this.fullName = fullName;
+    this.nhi = nhi;
+    this.region = region;
+    this.timestamp = timestamp;
+    this.organ = organ;
+  }
 
-    public String getNhi() {
-        return nhi;
-    }
+  String nhi;
+  String region;
+  LocalDateTime timestamp;
+  String organ;
 
-    public void setNhi(String nhi) {
-        this.nhi = nhi;
-    }
+  public String getNhi() {
+    return nhi;
+  }
 
-    public String getRegion() {
-        return region;
-    }
+  public void setNhi(String nhi) {
+    this.nhi = nhi;
+  }
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
+  public String getRegion() {
+    return region;
+  }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
+  public void setRegion(String region) {
+    this.region = region;
+  }
 
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
+  public LocalDateTime getTimestamp() {
+    return timestamp;
+  }
 
-    public String getOrgan() {
-        return organ;
-    }
+  public void setTimestamp(LocalDateTime timestamp) {
+    this.timestamp = timestamp;
+  }
 
-    public void setOrgan(String organ) {
-        this.organ = organ;
-    }
+  public String getOrgan() {
+    return organ;
+  }
 
-    public ReceiverRecord(String nhi, String region, LocalDateTime timestamp, String organ) {
+  public void setOrgan(String organ) {
+    this.organ = organ;
+  }
 
-        this.nhi = nhi;
-        this.region = region;
-        this.timestamp = timestamp;
-        this.organ = organ;
-    }
+  public ReceiverRecord(String nhi, String region, LocalDateTime timestamp, String organ) {
+
+    this.nhi = nhi;
+    this.region = region;
+    this.timestamp = timestamp;
+    this.organ = organ;
+  }
 }

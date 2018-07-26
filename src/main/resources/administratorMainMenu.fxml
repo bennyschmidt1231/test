@@ -31,20 +31,10 @@
                            <font>
                               <Font size="16.0" />
                            </font></Button>
-                        <Button mnemonicParsing="false" onAction="#importDonorDataButtonPressed" prefWidth="9999.0" text="Import Donor Data" textAlignment="CENTER" wrapText="true">
+                        <Button mnemonicParsing="false" onAction="#importUserDataButtonPressed" prefWidth="9999.0" text="Import User Data" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="16.0" />
                            </font></Button>
-                        <Button layoutX="10.0" layoutY="234.0" mnemonicParsing="false" onAction="#importClinicianDataButtonPressed" prefWidth="9999.0" text="Import Clinician Data" textAlignment="CENTER" wrapText="true">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Button>
-                        <Button layoutX="10.0" layoutY="74.0" mnemonicParsing="false" onAction="#importAdminDataButtonPressed" prefWidth="9999.0" text="Import Admin Data" textAlignment="CENTER" wrapText="true">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Button>
                         <Button fx:id="viewAdministratorButton" mnemonicParsing="false" onAction="#viewAdminsButtonPressed" prefWidth="9999.0" text="View Administrators" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="16.0" />
@@ -58,6 +48,11 @@
                            <font>
                               <Font size="16.0" />
                            </font></Button>
+                        <Button mnemonicParsing="false" onAction="#clearCache" prefWidth="1.0E25" text="Clear Cache">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
                         <Button alignment="BOTTOM_CENTER" mnemonicParsing="false" onAction="#logoutButtonPressed" prefWidth="9999.0" text="Log Out" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="16.0" />

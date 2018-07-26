@@ -143,13 +143,6 @@
     "originalVal" : "true",
     "changedVal" : "false",
     "changeTime" : [ 2018, 5, 24, 15, 38, 53, 281000000 ]
-  }, {
-    "accountModified" : "Sweeny Todd (NHI: ABC1234)",
-    "modifyingAccount" : "Sweeny Todd (NHI: ABC1234)",
-    "valChanged" : "livedInUKFlag",
-    "originalVal" : "false",
-    "changedVal" : "true",
-    "changeTime" : [ 2018, 7, 23, 16, 16, 11, 378000000 ]
   } ],
   "active" : true,
   "masterIllnessList" : [ ],

@@ -13,6 +13,13 @@
     </properties>
 
     <dependencies>
+        
+        <dependency>
+            <groupId>org.sonarsource.scanner.maven</groupId>
+            <artifactId>sonar-maven-plugin</artifactId>
+            <version>3.4.0.905</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -98,6 +105,12 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.4</version>
+        </dependency>
+
         <!-- Mockito dependencies. -->
         <dependency>
             <groupId >org.mockito</groupId >
@@ -106,7 +119,23 @@
             <scope>test</scope>
         </dependency>
 
+
     </dependencies>
+    
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation><activeByDefault>true</activeByDefault></activation>
+            <properties>
+                <!-- Optional URL to server. Default value is http://localhost:9000 -->
+                <sonar.host.url>
+                    http://csse-s302g6.canterbury.ac.nz:9000/
+                </sonar.host.url>
+            </properties>
+
+        </profile>
+    </profiles>
+    
     <build>
         <plugins>
             <plugin>
@@ -163,7 +192,7 @@
                   </execution>
                </executions>
             </plugin>
-</plugins>
+        </plugins>
     </build>
     <reporting>
         <plugins>

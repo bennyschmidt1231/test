@@ -8,53 +8,52 @@ import seng302.model.person.User;
 
 
 /**
- * ChildWindow is a simple container for a Stage, User, and ChildWindowType
- * object. Of the latter two, only one will be initialised in each instance.
+ * ChildWindow is a simple container for a Stage, User, and ChildWindowType object. Of the latter
+ * two, only one will be initialised in each instance.
  */
 public class ChildWindow {
 
 
-    // Class attributes.
-    private Stage stage;
-    private User user;
-    private ChildWindowType type;
+  // Class attributes.
+  private Stage stage;
+  private User user;
+  private ChildWindowType type;
 
 
-    /**
-     * Creates a ChildWindow instance with the given stage and an associated
-     * ChildWindowType enum. Neither should be null.
-     *
-     * @param stage The JavaFX stage displayed in the child window.
-     * @param type The ChildWindowType object associated with the window.
-     */
-    ChildWindow(Stage stage, ChildWindowType type) {
+  /**
+   * Creates a ChildWindow instance with the given stage and an associated ChildWindowType enum.
+   * Neither should be null.
+   *
+   * @param stage The JavaFX stage displayed in the child window.
+   * @param type The ChildWindowType object associated with the window.
+   */
+  ChildWindow(Stage stage, ChildWindowType type) {
 
-        if (stage == null || type == null) {
+    if (stage == null || type == null) {
 
-            throw new IllegalArgumentException("Stage and ChildWindowType " +
-                    "objects passed to ChildWindow should not be null.");
-
-        }
-
-        this.stage = stage;
-        this.type = type;
+      throw new IllegalArgumentException("Stage and ChildWindowType " +
+          "objects passed to ChildWindow should not be null.");
 
     }
 
+    this.stage = stage;
+    this.type = type;
 
-    /**
-     * Creates a ChildWindowInstance with the given stage and an associated
-     * User object.
-     *
-     * @param stage The JavaFX stage displayed in the ChildWindow.
-     * @param user The User object associated with the window.
-     */
-    ChildWindow(Stage stage, User user) {
+  }
 
-        if (stage == null || user == null) {
 
-            throw new IllegalArgumentException("Stage and User objects " +
-                    "passed to ChildWindow should not be null.");
+  /**
+   * Creates a ChildWindowInstance with the given stage and an associated User object.
+   *
+   * @param stage The JavaFX stage displayed in the ChildWindow.
+   * @param user The User object associated with the window.
+   */
+  ChildWindow(Stage stage, User user) {
+
+    if (stage == null || user == null) {
+
+      throw new IllegalArgumentException("Stage and User objects " +
+          "passed to ChildWindow should not be null.");
 
         }
 

@@ -180,3 +180,5 @@ local.properties
 
 # Unknown .imls
 app.iml
+
+.idea/

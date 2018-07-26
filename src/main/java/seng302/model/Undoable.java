@@ -5,15 +5,15 @@ package seng302.model;
  */
 public interface Undoable {
 
-    /**
-     * Procedure when selected undo
-     */
-    void undo();
+  /**
+   * Procedure when selected undo
+   */
+  void undo();
 
-    /**
-     * Procedure when selected redo
-     */
-    void redo();
+  /**
+   * Procedure when selected redo
+   */
+  void redo();
 
-    String getUndoRedoName();
+  String getUndoRedoName();
 }

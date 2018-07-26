@@ -83,7 +83,7 @@ Viewing an Account(s)
     -Template #3 [view donors <object>]  Views all donors with the chosen object
 
 
-        -object, [log, attributes, organs, all] decides which section of the profile the user wants to view.
+        -object, [attributes, organs, all] decides which section of the profile the user wants to view.
             -log, the change log of the account. When changes have been made, they are logged here with a timestamp and whatever the change was.
             -attributes, the set attributes of the account
             -organs, the organs that are deemed donatable by the user
@@ -97,24 +97,30 @@ Viewing an Account(s)
 ----------------------------------------------------------------------------
 Importing Account(s)
 
-    -Template [import]
+    -[import]
         -This imports all the account json files located in the accounts folder within the project.
 ----------------------------------------------------------------------------
 Deleting Account(s)
-    -Template [delete <nhi>]
-        -Where nhi is the national health index number of the account to be deleted
+
+    -[delete <nhi>]
+        -Deletes the account with the given nhi number\
+        
+    Example: [delete ASD9876] Deletes the Steve Job's account
 -----------------------------------------------------------------------------
 Exporting Account(s)
-    -Template [export]
+
+    -[export]
         -This exports all of the saved json files from the current runtime into json files found in the accounts folder within the project
 ---------------------------------------------------------------------------------
 Help
-    -Template [help <case>]
+
+    -[help <case>]
         -case = [all, create, update, view, import, export, delete, launch]
         -Prints a template regarding which case was called.
 --------------------------------------------------------------------------------
 Launching the GUI
-    -Template [launch]
+
+    -[launch]
         -launches the gui   
 ## Graphical User Interface
 A graphical user interface can be launched with the command 'launch' in the command

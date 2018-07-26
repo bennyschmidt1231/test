@@ -1,31 +1,32 @@
 package seng302.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
-import seng302.model.person.DonorReceiver;
-import seng302.model.person.LogEntry;
 
 public class ReceiverOrganInventoryTest {
+
   private ReceiverOrganInventory reqOrgans;
   private AccountManager accMan;
 
   @Before
-  public void setUp(){
-    LocalDateTime organUpdateTime = LocalDate.of(2018,5,3).atTime(14,15);
-    reqOrgans = new ReceiverOrganInventory(true,false,false,false,false,false,false,false,false,false,false,false,organUpdateTime,organUpdateTime,organUpdateTime,organUpdateTime,organUpdateTime,organUpdateTime,organUpdateTime,organUpdateTime,organUpdateTime,organUpdateTime,organUpdateTime,organUpdateTime);
+  public void setUp() {
+    LocalDateTime organUpdateTime = LocalDate.of(2018, 5, 3).atTime(14, 15);
+    reqOrgans = new ReceiverOrganInventory(true, false, false, false, false, false, false, false,
+        false, false, false, false, organUpdateTime, organUpdateTime, organUpdateTime,
+        organUpdateTime, organUpdateTime, organUpdateTime, organUpdateTime, organUpdateTime,
+        organUpdateTime, organUpdateTime, organUpdateTime, organUpdateTime);
   }
 
   /**
    * tests that the given output of toString() matches the expected output.
    */
   @Test
-  public void toStringTest(){
+  public void toStringTest() {
     String expectedOutput = "Organs to receive:\n" +
         "\tLiver\n" +
         "\n" +
@@ -38,7 +39,7 @@ public class ReceiverOrganInventoryTest {
    */
   @Test
   public void updateOrganDonationTest() {
-    String[] message = reqOrgans.updateOrganDonation("receiver", "liver", "false");
+    String[] message = reqOrgans.updateOrganDonation("receiver", "pancreas", "true");
     assertEquals("success", message[0]);
   }
 
@@ -48,7 +49,8 @@ public class ReceiverOrganInventoryTest {
   @Test
   public void updateOrganDonationTest2() {
     String[] message = reqOrgans.updateOrganDonation("receiver", "liver", "false");
-    assertEquals("success", message[0]);
+    assertEquals("To remove a receiving organ, please go to the transplant waiting list.",
+        message[0]);
   }
 
 

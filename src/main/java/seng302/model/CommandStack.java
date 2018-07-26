@@ -7,49 +7,49 @@ import java.util.Stack;
  */
 public class CommandStack {
 
-    private final Stack<Undoable> undo;
-    private final Stack<Undoable> redo;
+  private final Stack<Undoable> undo;
+  private final Stack<Undoable> redo;
 
-    public CommandStack() {
-        undo =  new Stack<>();
-        redo = new Stack<>();
+  public CommandStack() {
+    undo = new Stack<>();
+    redo = new Stack<>();
+  }
+
+  public void addCommand(Undoable undoable) {
+    if (undoable != null) {
+      undo.add(undoable);
+      redo.clear();
+    }
+  }
+
+  public void undo() {
+    if (!undo.isEmpty()) {
+      Undoable undoable = undo.pop();
+      undoable.undo();
+      redo.push(undoable);
     }
 
-    public void addCommand(Undoable undoable) {
-        if (undoable != null) {
-            undo.add(undoable);
-            redo.clear();
-        }
+  }
+
+
+  public void redo() {
+    if (!redo.isEmpty()) {
+      Undoable undoable = redo.pop();
+      undoable.redo();
+      undo.push(undoable);
     }
+  }
 
-    public void undo(){
-        if(!undo.isEmpty()) {
-            Undoable undoable = undo.pop();
-            undoable.undo();
-            redo.push(undoable);
-        }
+  public Stack<Undoable> getRedo() {
+    return redo;
+  }
 
-    }
+  public Stack<Undoable> getUndo() {
+    return undo;
+  }
 
-
-    public void redo(){
-        if(!redo.isEmpty()) {
-            Undoable undoable = redo.pop();
-            undoable.redo();
-            undo.push(undoable);
-        }
-    }
-
-    public Stack<Undoable> getRedo() {
-        return redo;
-    }
-
-    public Stack<Undoable> getUndo() {
-        return undo;
-    }
-
-    public void save() {
-        undo.clear();
-        redo.clear();
-    }
+  public void save() {
+    undo.clear();
+    redo.clear();
+  }
 }

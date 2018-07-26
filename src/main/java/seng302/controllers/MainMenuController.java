@@ -10,12 +10,17 @@ import seng302.model.PageNav;
 
 public class MainMenuController {
 
-    // JavaFX attributes referenced in 'MainMenu.fxml'.
-    @FXML public Label mainMenuTitle;
-    @FXML public Button viewEditClinicianButton;
-    @FXML public Button viewAllDonorsButton;
-    @FXML public Button addNewDonorButton;
-    @FXML public Button logoutButton;
+  // JavaFX attributes referenced in 'MainMenu.fxml'.
+  @FXML
+  public Label mainMenuTitle;
+  @FXML
+  public Button viewEditClinicianButton;
+  @FXML
+  public Button viewAllDonorsButton;
+  @FXML
+  public Button addNewDonorButton;
+  @FXML
+  public Button logoutButton;
 
     private static String searchValue = "";
 
@@ -28,45 +33,46 @@ public class MainMenuController {
     }
 
 
-    /**
-     * Changes the GUI pane to the create clinician pane when the "create clinician" button is pressed during runtime.
-     */
-    @FXML private void createClinician() {
-        PageNav.loadNewPage(PageNav.CREATECLINICIAN);
-    }
+  /**
+   * Changes the GUI pane to the create clinician pane when the "create clinician" button is pressed
+   * during runtime.
+   */
+  @FXML
+  private void createClinician() {
+    PageNav.isAdministrator = false;
+    PageNav.loadNewPage(PageNav.CREATECLINICIAN);
+  }
 
 
-    /**
-     * Switches to the list view screen with no search criteria.
-     *
-     */
-    @FXML private void viewAllDonorsSelected() {
-        searchValue = "";
-        PageNav.searchValue = searchValue;
-        PageNav.loadNewPage(PageNav.LISTVIEW);
-    }
+  /**
+   * Switches to the list view screen with no search criteria.
+   */
+  @FXML
+  private void viewAllDonorsSelected() {
+    searchValue = "";
+    PageNav.searchValue = searchValue;
+    PageNav.loadNewPage(PageNav.LISTVIEW);
+  }
 
 
-    /**
-     * Switches to the add new donor screen.
-     *
-     */
-    @FXML
-    private void addNewDonorSelected() {
-        CreateUserPaneController.lastScreen = PageNav.MAINMENU;
-        PageNav.loadNewPage(PageNav.CREATE);
-    }
+  /**
+   * Switches to the add new donor screen.
+   */
+  @FXML
+  private void addNewDonorSelected() {
+    CreateUserPaneController.lastScreen = PageNav.MAINMENU;
+    PageNav.loadNewPage(PageNav.CREATE);
+  }
 
-    /**
-     * Logs the user out and returns to the login screen.
-     *
-     */
-    @FXML
-    private void logoutSelected() {
-        ClinicianProfileController.setClinician(null);
-        AccountManager.setCurrentUser(null);
-        PageNav.loadNewPage(PageNav.LOGIN);
-    }
+  /**
+   * Logs the user out and returns to the login screen.
+   */
+  @FXML
+  private void logoutSelected() {
+    ClinicianProfileController.setClinician(null);
+    AccountManager.setCurrentUser(null);
+    PageNav.loadNewPage(PageNav.LOGIN);
+  }
 
 
     /**

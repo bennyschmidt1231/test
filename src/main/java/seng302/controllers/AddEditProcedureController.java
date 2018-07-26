@@ -1,9 +1,14 @@
 package seng302.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
@@ -11,8 +16,7 @@ import seng302.model.AccountManager;
 import seng302.model.person.DonorReceiver;
 import seng302.model.MedicalProcedure;
 import seng302.model.PageNav;
-
-import javafx.event.ActionEvent;
+import seng302.model.person.DonorReceiver;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -20,309 +24,316 @@ import java.util.ArrayList;
 
 
 public class AddEditProcedureController {
-    private static MedicalProcedure medicalProcedure;
-    // donorReceiver is the donorReceiver that the medical procedure belongs to.
-    private static DonorReceiver donorReceiver;
-    // Store whether the medical procedure is being edited (false if new procedure).
-    private boolean editing;
 
-    //============================//
-    // FXML elements
-    //============================//
-    @FXML
-    private TextArea summary;
-    @FXML
-    private DatePicker date;
-    @FXML
-    private CheckBox unknownDateCheck;
-    @FXML
-    private CheckBox liverCheck;
-    @FXML
-    private CheckBox kidneyCheck;
-    @FXML
-    private CheckBox heartCheck;
-    @FXML
-    private CheckBox lungCheck;
-    @FXML
-    private CheckBox intestinesCheck;
-    @FXML
-    private CheckBox corneaCheck;
-    @FXML
-    private CheckBox boneCheck;
-    @FXML
-    private CheckBox boneMarrowCheck;
-    @FXML
-    private CheckBox connectiveTissueCheck;
-    @FXML
-    private CheckBox pancreasCheck;
-    @FXML
-    private CheckBox middleEarCheck;
-    @FXML
-    private CheckBox skinCheck;
-    @FXML
-    private TextArea description;
-    @FXML
-    private Button cancelButton;
-    @FXML
-    private Button doneButton;
+  private static MedicalProcedure medicalProcedure;
+  // donorReceiver is the donorReceiver that the medical procedure belongs to.
+  private static DonorReceiver donorReceiver;
+  // Store whether the medical procedure is being edited (false if new procedure).
+  private boolean editing;
 
-    public static void setDonorReceiver(DonorReceiver userAccount) {
-        donorReceiver = userAccount;
+  //============================//
+  // FXML elements
+  //============================//
+  @FXML
+  private TextArea summary;
+  @FXML
+  private DatePicker date;
+  @FXML
+  private CheckBox unknownDateCheck;
+  @FXML
+  private CheckBox liverCheck;
+  @FXML
+  private CheckBox kidneyCheck;
+  @FXML
+  private CheckBox heartCheck;
+  @FXML
+  private CheckBox lungCheck;
+  @FXML
+  private CheckBox intestinesCheck;
+  @FXML
+  private CheckBox corneaCheck;
+  @FXML
+  private CheckBox boneCheck;
+  @FXML
+  private CheckBox boneMarrowCheck;
+  @FXML
+  private CheckBox connectiveTissueCheck;
+  @FXML
+  private CheckBox pancreasCheck;
+  @FXML
+  private CheckBox middleEarCheck;
+  @FXML
+  private CheckBox skinCheck;
+  @FXML
+  private TextArea description;
+  @FXML
+  private Button cancelButton;
+  @FXML
+  private Button doneButton;
+
+  public static void setDonorReceiver(DonorReceiver userAccount) {
+    donorReceiver = userAccount;
+  }
+
+  public static void setMedicalProcedure(MedicalProcedure userMedicalProcedure) {
+    medicalProcedure = userMedicalProcedure;
+  }
+
+
+  /**
+   * Handles how page switching occurs, which is dependent on whether or not the current window is a
+   * child window.
+   */
+  private void handlePageSwitching() {
+    try {
+      loadEditWindow();
+    } catch (IOException exception) {
+      System.out.println("Error loading the edit window from procedure.");
     }
+  }
 
-    public static void setMedicalProcedure(MedicalProcedure userMedicalProcedure) {
-        medicalProcedure = userMedicalProcedure;
-    }
+  /**
+   * Switches to the edit profile screen within the given window.
+   *
+   * @throws IOException When the FXML cannot be retrieved.
+   */
+  private void loadEditWindow() throws IOException {
+    // Set the selected donorReceiver for the profile pane and confirm child.
+    EditPaneController.setAccount(donorReceiver);
+    EditPaneController.setIsChild(true);
+    // reset the medical procedure window
+    donorReceiver = null;
+    medicalProcedure = null;
+    // Create new pane.
+    FXMLLoader loader = new FXMLLoader();
+    AnchorPane editPane = loader.load(getClass().getResourceAsStream(PageNav.EDIT));
+    // Create new scene.
+    Scene editScene = new Scene(editPane);
+    // Retrieve current stage and set scene.
+    Stage current = (Stage) cancelButton.getScene().getWindow();
+    current.setScene(editScene);
+  }
 
+  @FXML
+  void cancelButtonPressed(ActionEvent event) {
+    handlePageSwitching();
+  }
 
-    /**
-     * Handles how page switching occurs, which is dependent on whether or not
-     * the current window is a child window.
-     */
-    private void handlePageSwitching() {
+  public void showBadInputMessage(String message) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText("Bad User Input");
+    alert.setContentText(message);
+    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+    alert.showAndWait();
+  }
+
+  public void showSuccessMessage(String message) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("Information Dialog");
+    alert.setHeaderText("Success");
+    alert.setContentText(String.format(message));
+    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+    alert.showAndWait();
+
+  }
+
+  void createProcedure() {
+    // check that summary has less than 100 characters
+    // check that summary has at least one character
+    //check that description has at least one character
+    if (summary.getText().length() > 100) {
+      showBadInputMessage("Summary must not have more than 100 characters.");
+    } else if (summary.getText().length() < 1) {
+      showBadInputMessage("Summary must not be empty.");
+    } else if (description.getText().length() < 1) {
+      showBadInputMessage("Description must not be empty.");
+    } else {
+      ArrayList<String> affectedOrgans = new ArrayList<>(findAffectedOrgans());
+      String dateString = null;
+      if (!unknownDateCheck.isSelected()) {
         try {
-            loadEditWindow();
-        } catch(IOException exception) {
-            System.out.println("Error loading the edit window from procedure.");
+          dateString = date.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (NullPointerException e) {
+          showBadInputMessage("The date you have entered is invalid");
+          return;
         }
-    }
-
-    /**
-     * Switches to the edit profile screen within the given window.
-     *
-     * @throws IOException When the FXML cannot be retrieved.
-     */
-    private void loadEditWindow() throws IOException {
-        // Set the selected donorReceiver for the profile pane and confirm child.
-        EditPaneController.setAccount(donorReceiver);
-        EditPaneController.setIsChild(true);
-        // reset the medical procedure window
-        donorReceiver = null;
-        medicalProcedure = null;
-        // Create new pane.
-        FXMLLoader loader = new FXMLLoader();
-        AnchorPane editPane = loader.load(getClass().getResourceAsStream(PageNav.EDIT));
-        // Create new scene.
-        Scene editScene = new Scene(editPane);
-        // Retrieve current stage and set scene.
-        Stage current = (Stage) cancelButton.getScene().getWindow();
-        current.setScene(editScene);
-    }
-
-    @FXML
-    void cancelButtonPressed(ActionEvent event) {
+      }
+      try {
+        donorReceiver.addMedicalProcedure(AccountManager.getCurrentUser(), summary.getText(),
+            description.getText(), dateString, affectedOrgans);
+        showSuccessMessage(
+            "Procedure successfully created. Don't forget to save the application to make the change permanent.");
+        donorReceiver.extractPastProcedures();
+        donorReceiver.extractPendingProcedures();
         handlePageSwitching();
+      } catch (Exception ex) {
+        if (ex.getMessage().equals(MedicalProcedure.procedureDateTooEarlyErrorMessage)) {
+          showBadInputMessage(
+              "The date of the procedure must not be more than 12 months before the patient's date of birth.");
+        } else if (ex.getMessage().equals(DonorReceiver.procedureAlreadyExistsErrorMessage)) {
+          showBadInputMessage("A procedure with the same details already exists for this patient.");
+        }
+      }
     }
+  }
 
-    public void showBadInputMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText("Bad User Input");
-        alert.setContentText(message);
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alert.showAndWait();
+  private void editProcedure() {
+    if (summary.getText().length() > 100) {
+      showBadInputMessage("Summary must not have more than 100 characters.");
+    } else if (summary.getText().length() < 1) {
+      showBadInputMessage("Summary must not be empty.");
+    } else if (description.getText().length() < 1) {
+      showBadInputMessage("Description must not be empty.");
+    } else {
+      ArrayList<String> affectedOrgans = new ArrayList<>(findAffectedOrgans());
+      String dateString = null;
+      if (!unknownDateCheck.isSelected()) {
+        try {
+          dateString = date.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        } catch (NullPointerException e) {
+          showBadInputMessage("The date you have entered is invalid");
+          return;
+        }
+      }
+      try {
+        donorReceiver.updateMedicalProcedure(AccountManager.getCurrentUser(), medicalProcedure,
+            summary.getText(), description.getText(), dateString, affectedOrgans);
+        showSuccessMessage(
+            "Procedure successfully updated. Don't forget to save the application to make the change permanent.");
+        donorReceiver.extractPastProcedures();
+        donorReceiver.extractPendingProcedures();
+        handlePageSwitching();
+      } catch (Exception ex) {
+        if (ex.getMessage().equals(MedicalProcedure.procedureDateTooEarlyErrorMessage)) {
+          showBadInputMessage(
+              "The date of the procedure must not be more than 12 months before the patient's date of birth.");
+        } else if (ex.getMessage().equals(DonorReceiver.procedureAlreadyExistsErrorMessage)) {
+          showBadInputMessage("A procedure with the same details already exists for this patient.");
+        }
+      }
     }
+  }
 
-    public void showSuccessMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information Dialog");
-        alert.setHeaderText("Success");
-        alert.setContentText(String.format(message));
-        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
-        alert.showAndWait();
-
+  private ArrayList<String> findAffectedOrgans() {
+    // find affected organs of procedure
+    //"Liver", "Kidney", "Pancreas", "Heart", "Lung", "Intestines", "Cornea",
+    //"Middle Ear", "Skin", "Bone", "Bone Marrow", and "Connective Tissue".
+    ArrayList<String> affectedOrgans = new ArrayList<>();
+    if (liverCheck.isSelected()) {
+      affectedOrgans.add("Liver");
     }
-
-    void createProcedure() {
-        // check that summary has less than 100 characters
-        // check that summary has at least one character
-        //check that description has at least one character
-        if (summary.getText().length() > 100) {
-            showBadInputMessage("Summary must not have more than 100 characters.");
-        } else if (summary.getText().length() < 1) {
-            showBadInputMessage("Summary must not be empty.");
-        } else if (description.getText().length() < 1) {
-            showBadInputMessage("Description must not be empty.");
-        } else {
-            ArrayList<String> affectedOrgans = new ArrayList<>(findAffectedOrgans());
-            String dateString = null;
-            if (!unknownDateCheck.isSelected()) {
-                try {
-                    dateString = date.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                } catch (NullPointerException e) {
-                    showBadInputMessage("The date you have entered is invalid");
-                    return;
-                }
-            }
-            try {
-                donorReceiver.addMedicalProcedure(AccountManager.getCurrentUser(), summary.getText(), description.getText(), dateString, affectedOrgans);
-                showSuccessMessage("Procedure successfully created. Don't forget to save the application to make the change permanent.");
-                donorReceiver.extractPastProcedures();
-                donorReceiver.extractPendingProcedures();
-                handlePageSwitching();
-            } catch (Exception ex) {
-                if (ex.getMessage().equals(MedicalProcedure.procedureDateTooEarlyErrorMessage)) {
-                    showBadInputMessage("The date of the procedure must not be more than 12 months before the patient's date of birth.");
-                } else if (ex.getMessage().equals(DonorReceiver.procedureAlreadyExistsErrorMessage)) {
-                    showBadInputMessage("A procedure with the same details already exists for this patient.");
-                }
-            }
-        }
+    if (kidneyCheck.isSelected()) {
+      affectedOrgans.add("Kidney");
     }
-
-    private void editProcedure() {
-        if (summary.getText().length() > 100) {
-            showBadInputMessage("Summary must not have more than 100 characters.");
-        } else if (summary.getText().length() < 1) {
-            showBadInputMessage("Summary must not be empty.");
-        } else if (description.getText().length() < 1) {
-            showBadInputMessage("Description must not be empty.");
-        } else {
-            ArrayList<String> affectedOrgans = new ArrayList<>(findAffectedOrgans());
-            String dateString = null;
-            if (!unknownDateCheck.isSelected()) {
-                try {
-                    dateString = date.getValue().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                } catch (NullPointerException e) {
-                    showBadInputMessage("The date you have entered is invalid");
-                    return;
-                }
-            }
-            try {
-                donorReceiver.updateMedicalProcedure(AccountManager.getCurrentUser(), medicalProcedure, summary.getText(), description.getText(), dateString, affectedOrgans);
-                showSuccessMessage("Procedure successfully updated. Don't forget to save the application to make the change permanent.");
-                donorReceiver.extractPastProcedures();
-                donorReceiver.extractPendingProcedures();
-                handlePageSwitching();
-            } catch (Exception ex) {
-                if (ex.getMessage().equals(MedicalProcedure.procedureDateTooEarlyErrorMessage)) {
-                    showBadInputMessage("The date of the procedure must not be more than 12 months before the patient's date of birth.");
-                } else if (ex.getMessage().equals(DonorReceiver.procedureAlreadyExistsErrorMessage)) {
-                    showBadInputMessage("A procedure with the same details already exists for this patient.");
-                }
-            }
-        }
+    if (pancreasCheck.isSelected()) {
+      affectedOrgans.add("Pancreas");
     }
-
-    private  ArrayList<String> findAffectedOrgans() {
-        // find affected organs of procedure
-        //"Liver", "Kidney", "Pancreas", "Heart", "Lung", "Intestines", "Cornea",
-        //"Middle Ear", "Skin", "Bone", "Bone Marrow", and "Connective Tissue".
-        ArrayList<String> affectedOrgans = new ArrayList<>();
-        if (liverCheck.isSelected()) {
-            affectedOrgans.add("Liver");
-        }
-        if (kidneyCheck.isSelected()) {
-            affectedOrgans.add("Kidney");
-        }
-        if (pancreasCheck.isSelected()) {
-            affectedOrgans.add("Pancreas");
-        }
-        if (heartCheck.isSelected()) {
-            affectedOrgans.add("Heart");
-        }
-        if (lungCheck.isSelected()) {
-            affectedOrgans.add("Lung");
-        }
-        if (intestinesCheck.isSelected()) {
-            affectedOrgans.add("Intestines");
-        }
-        if (corneaCheck.isSelected()) {
-            affectedOrgans.add("Cornea");
-        }
-        if (middleEarCheck.isSelected()) {
-            affectedOrgans.add("Middle Ear");
-        }
-        if (skinCheck.isSelected()) {
-            affectedOrgans.add("Skin");
-        }
-        if (boneCheck.isSelected()) {
-            affectedOrgans.add("Bone");
-        }
-        if (boneMarrowCheck.isSelected()) {
-            affectedOrgans.add("Bone Marrrow");
-        }
-        if (connectiveTissueCheck.isSelected()) {
-            affectedOrgans.add("Connective Tissue");
-        }
-        return affectedOrgans;
+    if (heartCheck.isSelected()) {
+      affectedOrgans.add("Heart");
     }
-
-    @FXML
-    void doneButtonPressed(ActionEvent event) {
-        if (editing) {
-            editProcedure();
-        } else {
-            createProcedure();
-        }
+    if (lungCheck.isSelected()) {
+      affectedOrgans.add("Lung");
     }
-
-    @FXML
-    void unknownDateClicked(ActionEvent event) {
-        if (unknownDateCheck.isSelected()) {
-            date.setDisable(true);
-        } else {
-            date.setDisable(false);
-        }
+    if (intestinesCheck.isSelected()) {
+      affectedOrgans.add("Intestines");
     }
-
-    private void populateProcedureData() {
-        summary.setText(medicalProcedure.getSummary());
-        if (medicalProcedure.getDate() == null) {
-            unknownDateCheck.setSelected(true);
-            date.setDisable(true);
-        } else {
-            date.setValue(medicalProcedure.getDate());
-        }
-        // set checkboxes for
-        //"Liver", "Kidney", "Pancreas", "Heart", "Lung", "Intestines", "Cornea",
-        //"Middle Ear", "Skin", "Bone", "Bone Marrow", and "Connective Tissue".
-        ArrayList<String> affectedOrgans = medicalProcedure.getAffectedOrgans();
-        if (affectedOrgans.contains("Liver")) {
-            liverCheck.setSelected(true);
-        }
-        if (affectedOrgans.contains("Kidney")) {
-            kidneyCheck.setSelected(true);
-        }
-        if (affectedOrgans.contains("Pancreas")) {
-            pancreasCheck.setSelected(true);
-        }
-        if (affectedOrgans.contains("Heart")) {
-            heartCheck.setSelected(true);
-        }
-        if (affectedOrgans.contains("Lung")) {
-            lungCheck.setSelected(true);
-        }
-        if (affectedOrgans.contains("Intestines")) {
-            intestinesCheck.setSelected(true);
-        }
-        if (affectedOrgans.contains("Cornea")) {
-            corneaCheck.setSelected(true);
-        }
-        if (affectedOrgans.contains("Middle Ear")) {
-            middleEarCheck.setSelected(true);
-        }
-        if (affectedOrgans.contains("Skin")) {
-            skinCheck.setSelected(true);
-        }
-        if (affectedOrgans.contains("Bone")) {
-            boneCheck.setSelected(true);
-        }
-        if (affectedOrgans.contains("Bone Marrow")) {
-            boneMarrowCheck.setSelected(true);
-        }
-        if (affectedOrgans.contains("Connective Tissue")) {
-            connectiveTissueCheck.setSelected(true);
-        }
-        description.setText(medicalProcedure.getDescription());
+    if (corneaCheck.isSelected()) {
+      affectedOrgans.add("Cornea");
     }
-
-    public void initialize () {
-        if (medicalProcedure == null) {
-            editing = false;
-        } else {
-            editing = true;
-            populateProcedureData();
-        }
+    if (middleEarCheck.isSelected()) {
+      affectedOrgans.add("Middle Ear");
     }
+    if (skinCheck.isSelected()) {
+      affectedOrgans.add("Skin");
+    }
+    if (boneCheck.isSelected()) {
+      affectedOrgans.add("Bone");
+    }
+    if (boneMarrowCheck.isSelected()) {
+      affectedOrgans.add("Bone Marrrow");
+    }
+    if (connectiveTissueCheck.isSelected()) {
+      affectedOrgans.add("Connective Tissue");
+    }
+    return affectedOrgans;
+  }
+
+  @FXML
+  void doneButtonPressed(ActionEvent event) {
+    if (editing) {
+      editProcedure();
+    } else {
+      createProcedure();
+    }
+  }
+
+  @FXML
+  void unknownDateClicked(ActionEvent event) {
+    if (unknownDateCheck.isSelected()) {
+      date.setDisable(true);
+    } else {
+      date.setDisable(false);
+    }
+  }
+
+  private void populateProcedureData() {
+    summary.setText(medicalProcedure.getSummary());
+    if (medicalProcedure.getDate() == null) {
+      unknownDateCheck.setSelected(true);
+      date.setDisable(true);
+    } else {
+      date.setValue(medicalProcedure.getDate());
+    }
+    // set checkboxes for
+    //"Liver", "Kidney", "Pancreas", "Heart", "Lung", "Intestines", "Cornea",
+    //"Middle Ear", "Skin", "Bone", "Bone Marrow", and "Connective Tissue".
+    ArrayList<String> affectedOrgans = medicalProcedure.getAffectedOrgans();
+    if (affectedOrgans.contains("Liver")) {
+      liverCheck.setSelected(true);
+    }
+    if (affectedOrgans.contains("Kidney")) {
+      kidneyCheck.setSelected(true);
+    }
+    if (affectedOrgans.contains("Pancreas")) {
+      pancreasCheck.setSelected(true);
+    }
+    if (affectedOrgans.contains("Heart")) {
+      heartCheck.setSelected(true);
+    }
+    if (affectedOrgans.contains("Lung")) {
+      lungCheck.setSelected(true);
+    }
+    if (affectedOrgans.contains("Intestines")) {
+      intestinesCheck.setSelected(true);
+    }
+    if (affectedOrgans.contains("Cornea")) {
+      corneaCheck.setSelected(true);
+    }
+    if (affectedOrgans.contains("Middle Ear")) {
+      middleEarCheck.setSelected(true);
+    }
+    if (affectedOrgans.contains("Skin")) {
+      skinCheck.setSelected(true);
+    }
+    if (affectedOrgans.contains("Bone")) {
+      boneCheck.setSelected(true);
+    }
+    if (affectedOrgans.contains("Bone Marrow")) {
+      boneMarrowCheck.setSelected(true);
+    }
+    if (affectedOrgans.contains("Connective Tissue")) {
+      connectiveTissueCheck.setSelected(true);
+    }
+    description.setText(medicalProcedure.getDescription());
+  }
+
+  public void initialize() {
+    if (medicalProcedure == null) {
+      editing = false;
+    } else {
+      editing = true;
+      populateProcedureData();
+    }
+  }
 }

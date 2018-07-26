@@ -11,6 +11,13 @@
   "userName" : "Sudo",
   "password" : "password",
   "creationDate" : [ 2018, 5, 17, 18, 12, 16, 377000000 ],
-  "modifications" : [ ],
+  "modifications" : [ {
+    "accountModified" : "root     (Administrator, username: root)",
+    "modifyingAccount" : "Default Administrator (Administrator, username: Sudo)",
+    "valChanged" : "created",
+    "originalVal" : "",
+    "changedVal" : "root",
+    "changeTime" : [ 2018, 7, 21, 16, 58, 32, 571000000 ]
+  } ],
   "active" : true
 }
